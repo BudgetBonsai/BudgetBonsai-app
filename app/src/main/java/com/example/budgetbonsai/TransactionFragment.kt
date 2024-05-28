@@ -1,31 +1,50 @@
 package com.example.budgetbonsai
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager2.widget.ViewPager2
+import com.example.budgetbonsai.databinding.FragmentTransactionBinding
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
-
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TransactionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TransactionFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var binding: FragmentTransactionBinding
+    private lateinit var pieChart: PieChart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        binding = FragmentTransactionBinding.inflate(layoutInflater)
+
+        pieChart = binding.piechart
+
+        val list: ArrayList<PieEntry> = ArrayList()
+
+        list.add(PieEntry(30f, "Food"))
+        list.add(PieEntry(20f, "Transport"))
+        list.add(PieEntry(10f, "Entertainment"))
+        list.add(PieEntry(40f, "Others"))
+
+        val pieDataset = PieDataSet(list, "Expenses")
+        pieDataset.setColors(ColorTemplate.MATERIAL_COLORS, 255)
+        pieDataset.valueTextSize = 15f
+        pieDataset.valueTextColor = Color.BLACK
+
+        val pieData = PieData(pieDataset)
+
+        pieChart.data = pieData
+
+        pieChart.description.text = "Expenses Pie Chart"
+        pieChart.animateY(2000)
     }
 
     override fun onCreateView(
@@ -36,23 +55,63 @@ class TransactionFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_transaction, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TransactionFragment.
-         */
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TransactionFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        val pieChart = view.findViewById<PieChart>(R.id.piechart)
+        val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
+        val viewPager = view.findViewById<ViewPager2>(R.id.viewPager)
+
+        val list: ArrayList<PieEntry> = ArrayList()
+
+        list.add(PieEntry(30f, "Food"))
+        list.add(PieEntry(20f, "Transport"))
+        list.add(PieEntry(10f, "Entertainment"))
+        list.add(PieEntry(40f, "Others"))
+
+        val pieDataset = PieDataSet(list, "Expenses")
+        pieDataset.setColors(ColorTemplate.MATERIAL_COLORS, 255)
+        pieDataset.valueTextSize = 15f
+        pieDataset.valueTextColor = Color.BLACK
+
+        val pieData = PieData(pieDataset)
+
+        pieChart.data = pieData
+
+        pieChart.description.text = "Expenses Pie Chart"
+        pieChart.animateY(1000)
+
+        val adapter = ViewPagerAdapter(this)
+        viewPager.adapter = adapter
+
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Daily"
+                }
+                1 -> {
+                    tab.text = "Weekly"
+                }
+                2 -> {
+                    tab.text = "Monthly"
                 }
             }
+        }.attach()
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                // Handle tab select
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                // Handle tab reselect
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                // Handle tab unselect
+            }
+        })
+
     }
 }

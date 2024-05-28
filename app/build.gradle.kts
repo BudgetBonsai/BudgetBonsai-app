@@ -54,4 +54,9 @@ dependencies {
     //glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
+    //mpandroidchart
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    //viewpager
+    implementation ("androidx.viewpager2:viewpager2:1.1.0")
 }
