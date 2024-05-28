@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity() {
                     // Respond to navigation item 2 click
                     true
                 }
+                R.id.addFragment -> {
+                    // Respond to navigation item 3 click
+                    true
+                }
                 else -> false
             }
         }
