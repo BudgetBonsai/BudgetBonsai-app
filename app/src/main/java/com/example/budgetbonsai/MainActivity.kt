@@ -37,6 +37,10 @@ class MainActivity : AppCompatActivity() {
                     // Respond to navigation item 3 click
                     true
                 }
+                R.id.wishlistFragment -> {
+                    // Respond to navigation item 4 click
+                    true
+                }
                 else -> false
             }
         }
