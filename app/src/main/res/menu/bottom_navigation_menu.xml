@@ -9,7 +9,7 @@
         android:icon="@drawable/baseline_history_24"
         android:title="Transaction"/>
     <item
-        android:id="@+id/item_3"
+        android:id="@+id/addFragment"
         android:icon="@drawable/baseline_add_24"
         android:title="Add"/>
     <item
