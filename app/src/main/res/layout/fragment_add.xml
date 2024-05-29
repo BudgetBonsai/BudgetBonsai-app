@@ -23,7 +23,8 @@
         android:text="Add to Expenses"
         android:layout_marginBottom="8dp"
         android:layout_marginHorizontal="32dp"
-        android:backgroundTint="#BDD898"/>
+        android:backgroundTint="#BDD898"
+        android:onClick="onAddExpensesClicked"/>
     <Button
         android:id="@+id/btn_addwithcamera"
         android:layout_width="match_parent"

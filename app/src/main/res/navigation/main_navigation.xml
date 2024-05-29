@@ -18,7 +18,11 @@
         android:id="@+id/addFragment"
         android:name="com.example.budgetbonsai.AddFragment"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add">
+        <action
+            android:id="@+id/action_addFragment_to_addExpensesFragment"
+            app:destination="@id/addExpensesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/wishlistFragment"
         android:name="com.example.budgetbonsai.WishlistFragment"
@@ -38,4 +42,9 @@
         android:name="com.example.budgetbonsai.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/addExpensesFragment"
+        android:name="com.example.budgetbonsai.AddExpensesFragment"
+        android:label="fragment_add_expenses"
+        tools:layout="@layout/fragment_add_expenses" />
 </navigation>
