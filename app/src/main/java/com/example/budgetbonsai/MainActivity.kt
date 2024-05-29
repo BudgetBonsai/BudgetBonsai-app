@@ -40,6 +40,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.wishlistFragment -> {
                     // Respond to navigation item 4 click
                     true
+                }R.id.settingsFragment -> {
+                    // Respond to navigation item 4 click
+                    true
                 }
                 else -> false
             }

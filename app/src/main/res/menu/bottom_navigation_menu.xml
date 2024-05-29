@@ -17,7 +17,7 @@
         android:icon="@drawable/baseline_star_outline_24"
         android:title="Wishlist"/>
     <item
-        android:id="@+id/item_5"
+        android:id="@+id/settingsFragment"
         android:icon="@drawable/baseline_settings_24"
         android:title="Settings"/>
 

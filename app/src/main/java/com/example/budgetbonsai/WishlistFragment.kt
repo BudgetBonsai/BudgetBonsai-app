@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WishlistFragment : Fragment() {
 
@@ -39,6 +41,12 @@ class WishlistFragment : Fragment() {
         // Set adapter
         wishlistAdapter = WishlistAdapter(wishlist)
         recyclerView?.adapter = wishlistAdapter
+
+        val fab = view.findViewById<FloatingActionButton>(R.id.fab_add)
+        fab.setOnClickListener {
+            // Use NavController to navigate to the other fragment
+            findNavController().navigate(R.id.action_wishlistFragment_to_addFragment)
+        }
     }
 
     override fun onDestroyView() {

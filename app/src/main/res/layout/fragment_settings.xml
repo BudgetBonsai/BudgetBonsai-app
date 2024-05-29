@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SettingsFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:backgroundTint="#F2F1EF">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_settings"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/baseline_person_24"/>
+
+        <TextView
+            android:id="@+id/tv_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_below="@+id/iv_settings"
+            android:text="Settings"
+            style="@style/TextAppearance.Material3.TitleLarge"/>
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_notifications"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_alignStart="@id/tv_settings"-->
+<!--                android:layout_below="@id/tv_settings"-->
+<!--                android:text="Notifications"/>-->
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="8dp"
+                android:layout_below="@id/tv_settings"
+                android:layout_alignStart="@id/tv_settings"
+                android:checked="true"
+                android:text="Notifications"/>
+
+            <Button
+                android:id="@+id/btn_language"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:gravity="start"
+                android:paddingStart="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/tv_settings"
+                android:layout_below="@id/switch_notifications"
+                android:layout_marginTop="0dp"
+                android:text="Language" />
+            <Button
+                android:id="@+id/btn_signout"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:gravity="start"
+                android:paddingStart="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/tv_settings"
+                android:layout_below="@id/btn_language"
+                android:layout_marginTop="0dp"
+                android:textColor="@color/design_default_color_error"
+                android:text="Signout" />
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>
