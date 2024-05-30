@@ -6,17 +6,17 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.budgetbonsai.HomeFragment"
+        android:name="com.example.budgetbonsai.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="com.example.budgetbonsai.TransactionFragment"
+        android:name="com.example.budgetbonsai.ui.transaction.TransactionFragment"
         android:label="fragment_transaction"
         tools:layout="@layout/fragment_transaction" />
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.example.budgetbonsai.AddFragment"
+        android:name="com.example.budgetbonsai.ui.add.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add">
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/wishlistFragment"
-        android:name="com.example.budgetbonsai.WishlistFragment"
+        android:name="com.example.budgetbonsai.ui.wishlist.WishlistFragment"
         android:label="fragment_wishlist"
         tools:layout="@layout/fragment_wishlist">
         <action
@@ -34,17 +34,17 @@
     </fragment>
     <fragment
         android:id="@+id/addWishlistFragment"
-        android:name="com.example.budgetbonsai.AddWishlistFragment"
+        android:name="com.example.budgetbonsai.ui.wishlist.AddWishlistFragment"
         android:label="fragment_add_wishlist"
         tools:layout="@layout/fragment_add_wishlist" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.budgetbonsai.SettingsFragment"
+        android:name="com.example.budgetbonsai.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/addExpensesFragment"
-        android:name="com.example.budgetbonsai.AddExpensesFragment"
+        android:name="com.example.budgetbonsai.ui.add.AddExpensesFragment"
         android:label="fragment_add_expenses"
         tools:layout="@layout/fragment_add_expenses" />
 </navigation>

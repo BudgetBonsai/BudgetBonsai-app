@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TransactionFragment">
+    tools:context=".ui.transaction.TransactionFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -24,7 +24,25 @@
             android:layout_height="120dp"
             android:layout_weight="1"
             android:layout_marginStart="16dp"
-            android:backgroundTint="#EEFFE3"/>
+            android:backgroundTint="#EEFFE3">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Income"
+                    android:padding="8dp"
+                    style="@style/TextAppearance.MyApp.TitleMedium"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="$1,200"
+                    android:paddingHorizontal="8dp"
+                    style="@style/TextAppearance.MyApp.TitleLarge"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_expense"
             android:layout_width="0dp"
@@ -32,7 +50,26 @@
             android:layout_weight="1"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:backgroundTint="#FFD6D6"/>
+            android:backgroundTint="#FFD6D6">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Outcome"
+                    android:padding="8dp"
+                    style="@style/TextAppearance.MyApp.TitleMedium"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="$1,200"
+                    android:layout_gravity="bottom"
+                    android:paddingHorizontal="8dp"
+                    style="@style/TextAppearance.MyApp.TitleLarge"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
     <TextView
@@ -84,6 +121,11 @@
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

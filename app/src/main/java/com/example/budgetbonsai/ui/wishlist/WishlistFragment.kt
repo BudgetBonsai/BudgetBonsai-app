@@ -1,4 +1,4 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.ui.wishlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.budgetbonsai.R
+import com.example.budgetbonsai.Wishlist
+import com.example.budgetbonsai.WishlistAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WishlistFragment : Fragment() {

@@ -24,6 +24,10 @@ class RegisterActivity : AppCompatActivity() {
             insets
         }
 
+        binding.btnArrowback.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         //Dialog
 //        binding.loginButton.setOnClickListener {
 //            MaterialAlertDialogBuilder(this)

@@ -1,14 +1,10 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.ui
 
 import android.os.Bundle
-import android.text.TextUtils.replace
-import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.budgetbonsai.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
@@ -40,7 +36,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.wishlistFragment -> {
                     // Respond to navigation item 4 click
                     true
-                }R.id.settingsFragment -> {
+                }
+
+                R.id.settingsFragment -> {
                     // Respond to navigation item 4 click
                     true
                 }

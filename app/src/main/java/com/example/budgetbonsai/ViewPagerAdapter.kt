@@ -2,6 +2,9 @@ package com.example.budgetbonsai
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.budgetbonsai.ui.transaction.DailyFragment
+import com.example.budgetbonsai.ui.transaction.MonthlyFragment
+import com.example.budgetbonsai.ui.transaction.WeeklyFragment
 
 class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 

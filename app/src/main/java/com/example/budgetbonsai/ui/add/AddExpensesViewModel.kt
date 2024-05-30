@@ -1,4 +1,4 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.ui.add
 
 import androidx.lifecycle.ViewModel
 

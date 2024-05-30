@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/logo_title" />
 
     <ImageButton
-        android:id="@+id/arrowImageButton"
+        android:id="@+id/btn_arrowback"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"

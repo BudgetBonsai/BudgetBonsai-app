@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".AddWishlistFragment">
+    tools:context=".ui.wishlist.AddWishlistFragment">
 
     <ImageButton
         android:id="@+id/backImageButton"
@@ -103,21 +103,21 @@
                 android:paddingTop="16dp">
                 <Button
                     style="?attr/materialButtonOutlinedStyle"
-                    android:id="@+id/button1"
+                    android:id="@+id/btn_daily"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Daily"
-                    />
+                    app:singleSelection="true" />
                 <Button
                     style="?attr/materialButtonOutlinedStyle"
-                    android:id="@+id/button2"
+                    android:id="@+id/btn_weekly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Weekly"
                     />
                 <Button
                     style="?attr/materialButtonOutlinedStyle"
-                    android:id="@+id/button3"
+                    android:id="@+id/btn_monthly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Monthly"

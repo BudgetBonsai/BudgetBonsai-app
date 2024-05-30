@@ -1,4 +1,4 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.ui.add
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -6,11 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AutoCompleteTextView
-import androidx.lifecycle.ViewModelProvider
+import android.widget.ArrayAdapter
+import com.example.budgetbonsai.Category
+import com.example.budgetbonsai.R
 import com.example.budgetbonsai.databinding.FragmentAddExpensesBinding
-import com.example.budgetbonsai.databinding.FragmentAddWishlistBinding
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -37,6 +36,25 @@ class AddExpensesFragment : Fragment() {
 
         binding.dateInputEditText.setOnClickListener {
             showDatePickerDialog()
+        }
+
+        binding.toggleButton.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.btn_expense -> {
+                        val listExpense = Category.expenseCategory()
+                        val expensesAdapter = ArrayAdapter(requireContext(),
+                            R.layout.list_item, listExpense)
+                        binding.autoCompleteTextView.setAdapter(expensesAdapter)
+                    }
+                    R.id.btn_income -> {
+                        val listIncome = Category.incomeCategory()
+                        val incomeAdapter = ArrayAdapter(requireContext(),
+                            R.layout.list_item, listIncome)
+                        binding.autoCompleteTextView.setAdapter(incomeAdapter)
+                    }
+                }
+            }
         }
     }
 

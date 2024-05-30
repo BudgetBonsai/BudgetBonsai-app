@@ -1,4 +1,4 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.ui.wishlist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

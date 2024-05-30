@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AddExpensesFragment">
+    tools:context=".ui.add.AddExpensesFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -74,7 +74,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                app:simpleItems="@array/simple_items"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -84,17 +83,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            app:singleSelection="true">
             <Button
                 style="?attr/materialButtonOutlinedStyle"
-                android:id="@+id/button1"
+                android:id="@+id/btn_income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Income"
                 />
             <Button
                 style="?attr/materialButtonOutlinedStyle"
-                android:id="@+id/button2"
+                android:id="@+id/btn_expense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outcome"
