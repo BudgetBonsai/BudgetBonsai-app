@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.Toast
 import com.example.budgetbonsai.Category
 import com.example.budgetbonsai.R
 import com.example.budgetbonsai.databinding.FragmentAddExpensesBinding
@@ -43,18 +45,29 @@ class AddExpensesFragment : Fragment() {
                 when (checkedId) {
                     R.id.btn_expense -> {
                         val listExpense = Category.expenseCategory()
-                        val expensesAdapter = ArrayAdapter(requireContext(),
-                            R.layout.list_item, listExpense)
+                        val expensesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, listExpense)
                         binding.autoCompleteTextView.setAdapter(expensesAdapter)
                     }
                     R.id.btn_income -> {
                         val listIncome = Category.incomeCategory()
-                        val incomeAdapter = ArrayAdapter(requireContext(),
-                            R.layout.list_item, listIncome)
+                        val incomeAdapter = ArrayAdapter(requireContext(), R.layout.list_item, listIncome)
                         binding.autoCompleteTextView.setAdapter(incomeAdapter)
                     }
                 }
             }
+        }
+
+        val autoCompleteTextView = binding.autoCompleteTextView // Replace with your view binding
+
+        autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+            val selectedCategory = parent.getItemAtPosition(position) as String
+            // Do something with the selectedCategory, e.g., show a toast
+            Toast.makeText(requireContext(), "Selected Category: $selectedCategory", Toast.LENGTH_SHORT).show()
+        }
+
+
+        binding.btnAdd.setOnClickListener {
+
         }
     }
 

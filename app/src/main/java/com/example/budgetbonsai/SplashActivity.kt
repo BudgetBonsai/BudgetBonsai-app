@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.budgetbonsai.ui.MainActivity
+import com.example.budgetbonsai.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
     private val viewModel: SplashViewModel by viewModels()
@@ -23,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
                     android.R.anim.fade_in,
                     android.R.anim.fade_out
                 )
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent, options.toBundle())
                 finish()
             }
