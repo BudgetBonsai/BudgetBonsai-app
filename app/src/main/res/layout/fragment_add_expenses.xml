@@ -102,7 +102,7 @@
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/btn_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Transaction"
