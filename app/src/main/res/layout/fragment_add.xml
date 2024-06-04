@@ -20,7 +20,7 @@
         android:id="@+id/btn_addexpenses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add to Expenses"
+        android:text="Add to Transaction"
         android:layout_marginBottom="8dp"
         android:layout_marginHorizontal="32dp"
         android:backgroundTint="#BDD898"
@@ -29,7 +29,7 @@
         android:id="@+id/btn_addwithcamera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add to Expenses using Camera"
+        android:text="Add to Transaction using Camera"
         android:layout_marginHorizontal="32dp"
         android:backgroundTint="#BDD898"/>
 
