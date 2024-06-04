@@ -5,15 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.remote.ApiService
-import com.example.budgetbonsai.data.remote.response.LoginResponse
-import com.example.budgetbonsai.data.remote.response.RegisterResponse
 import retrofit2.HttpException
 import com.example.budgetbonsai.Result
+import com.example.budgetbonsai.data.model.UserModel
+import com.example.budgetbonsai.data.remote.response.LoginResponsee
+import com.example.budgetbonsai.data.remote.response.RegisterResponse1
 import kotlinx.coroutines.flow.Flow
 
 class Repository private constructor(
     private val apiService: ApiService,
-    private val userPreference: UserPreference
+    private val userPreference: UserPreference,
 ){
 
     fun getSession(): Flow<UserModel> {
@@ -25,7 +26,7 @@ class Repository private constructor(
     }
 
     fun register(name: String, email: String, password: String
-    ): LiveData<Result<RegisterResponse>> = liveData {
+    ): LiveData<Result<RegisterResponse1>> = liveData {
         emit(Result.Loading)
         try {
             val client = apiService.register(name, email, password)
@@ -37,7 +38,7 @@ class Repository private constructor(
     }
 
     fun login(email: String, password: String
-    ): LiveData<Result<LoginResponse>> = liveData {
+    ): LiveData<Result<LoginResponsee>> = liveData {
         emit(Result.Loading)
             try {
                 val client = apiService.login(email, password)
@@ -47,6 +48,14 @@ class Repository private constructor(
                 emit(Result.Error(e.message().toString()))
             }
     }
+
+//    suspend fun getFinancialRecords(email: String): List<FinancialRecord> {
+//        val recordsFromApi = apiService.getFinancialRecords()
+//        recordsFromApi.forEach { record ->
+//            db.financialRecordDao().insertRecord(record)
+//        }
+//        return db.financialRecordDao().getRecords(email)
+//    }
 
     companion object {
         @Volatile

@@ -13,10 +13,11 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.budgetbonsai.R
 import com.example.budgetbonsai.Result
 import com.example.budgetbonsai.ViewModelFactory
-import com.example.budgetbonsai.data.UserModel
+import com.example.budgetbonsai.data.model.UserModel
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.databinding.ActivityLoginBinding
 import com.example.budgetbonsai.ui.MainActivity
+import com.example.budgetbonsai.ui.MainViewModel
 import com.example.budgetbonsai.ui.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -64,8 +65,8 @@ class LoginActivity : AppCompatActivity() {
 
                         is Result.Success -> {
                             showLoading(false)
-                            val token = it.data.loginResult?.token.toString()
-                            val name = it.data.loginResult?.name.toString()
+                            val token = it.data.data?.token.toString()
+                            val name = it.data.data?.name.toString()
                             viewModel.saveSession(
                                 UserModel(
                                     name,

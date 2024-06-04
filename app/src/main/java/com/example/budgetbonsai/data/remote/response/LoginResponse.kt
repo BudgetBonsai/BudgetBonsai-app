@@ -2,26 +2,29 @@ package com.example.budgetbonsai.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginResult(
+data class LoginResponsee(
 
-    @field:SerializedName("name")
-    val name: String? = null,
+	@field:SerializedName("data")
+	val data: LoginResult? = null,
 
-    @field:SerializedName("userId")
-    val userId: String? = null,
+	@field:SerializedName("error")
+	val error: Boolean? = null,
 
-    @field:SerializedName("token")
-    val token: String? = null
+	@field:SerializedName("message")
+	val message: String? = null
 )
 
-data class LoginResponse(
+data class LoginResult(
 
-    @field:SerializedName("loginResult")
-    val loginResult: LoginResult? = null,
+	@field:SerializedName("uid")
+	val uid: String? = null,
 
-    @field:SerializedName("error")
-    val error: Boolean? = null,
+	@field:SerializedName("name")
+	val name: String? = null,
 
-    @field:SerializedName("message")
-    val message: String? = null
+	@field:SerializedName("email")
+	val email: String? = null,
+
+	@field:SerializedName("token")
+	val token: String? = null
 )

@@ -17,7 +17,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\"")
+        buildConfigField("String", "BASE_URL", "\"https://capstone-mpyzges47a-et.a.run.app/\"")
     }
 
     buildTypes {
@@ -64,7 +64,7 @@ dependencies {
     //viewpager
     implementation ("androidx.viewpager2:viewpager2:1.1.0")
 
-    //fragment-ktx
+    //navigation
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
 
@@ -79,6 +79,11 @@ dependencies {
     implementation ("androidx.datastore:datastore-preferences:1.1.1")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.1")
 
+    //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+
+    //room
+    implementation ("androidx.room:room-runtime:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
 }

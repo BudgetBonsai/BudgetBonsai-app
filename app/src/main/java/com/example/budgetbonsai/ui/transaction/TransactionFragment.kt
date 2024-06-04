@@ -45,7 +45,6 @@ class TransactionFragment : Fragment() {
 
         pieChart.data = pieData
 
-        pieChart.description.text = "Expenses Pie Chart"
         pieChart.animateY(2000)
     }
 

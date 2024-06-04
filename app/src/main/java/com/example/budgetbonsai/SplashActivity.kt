@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.budgetbonsai.ui.MainActivity
+import com.example.budgetbonsai.ui.landing.LandingActivity
 import com.example.budgetbonsai.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -14,7 +15,6 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        //test
         viewModel.startSplashTimer()
 
         viewModel.isTimerFinished.observe(this) { isFinished ->
@@ -24,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
                     android.R.anim.fade_in,
                     android.R.anim.fade_out
                 )
-                val intent = Intent(this, LoginActivity::class.java)
+                val intent = Intent(this, LandingActivity::class.java)
                 startActivity(intent, options.toBundle())
                 finish()
             }
