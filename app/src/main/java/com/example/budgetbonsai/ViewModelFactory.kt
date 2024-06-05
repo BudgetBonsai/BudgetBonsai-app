@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.budgetbonsai.data.Repository
 import com.example.budgetbonsai.di.Injection
+import com.example.budgetbonsai.ui.MainViewModel
 import com.example.budgetbonsai.ui.login.LoginViewModel
 import com.example.budgetbonsai.ui.register.RegisterViewModel
 
@@ -12,6 +13,9 @@ class ViewModelFactory(private val repository: Repository): ViewModelProvider.Ne
 
     @Suppress("UNCHECK_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            return MainViewModel(repository) as T
+        }
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(repository) as T
         }

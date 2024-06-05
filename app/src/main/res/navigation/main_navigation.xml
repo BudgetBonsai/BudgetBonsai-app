@@ -44,7 +44,7 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/addExpensesFragment"
-        android:name="com.example.budgetbonsai.ui.add.AddExpensesFragment"
+        android:name="com.example.budgetbonsai.ui.add.AddTransactionFragment"
         android:label="fragment_add_expenses"
         tools:layout="@layout/fragment_add_transaction" />
 </navigation>

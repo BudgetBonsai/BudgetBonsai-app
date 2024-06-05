@@ -1,14 +1,24 @@
 package com.example.budgetbonsai.ui
 
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.budgetbonsai.R
+import com.example.budgetbonsai.ViewModelFactory
+import com.example.budgetbonsai.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
+    private val viewModelFactory = ViewModelFactory.getInstance(this)
+    private val viewModel: MainViewModel by viewModels { viewModelFactory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,6 +28,13 @@ class MainActivity : AppCompatActivity() {
         val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         bottomNavView.setupWithNavController(navController)
+
+        viewModel.getLoginData().observe(this) {
+            val loginState = it.isLogin
+            val token = it.token
+            Log.d("LOGINSTATE", loginState.toString())
+            Log.d("TOKENSTATE", token.toString())
+        }
 
         NavigationBarView.OnItemSelectedListener { item ->
             when(item.itemId) {
