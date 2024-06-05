@@ -15,10 +15,14 @@ import com.example.budgetbonsai.Result
 import com.example.budgetbonsai.ViewModelFactory
 import com.example.budgetbonsai.data.model.UserModel
 import com.example.budgetbonsai.data.local.UserPreference
+import com.example.budgetbonsai.data.local.dataStore
 import com.example.budgetbonsai.databinding.ActivityLoginBinding
 import com.example.budgetbonsai.ui.MainActivity
 import com.example.budgetbonsai.ui.MainViewModel
 import com.example.budgetbonsai.ui.register.RegisterActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
@@ -38,6 +42,9 @@ class LoginActivity : AppCompatActivity() {
 
         val viewModelFactory = ViewModelFactory.getInstance(this)
         val viewModel: LoginViewModel by viewModels { viewModelFactory}
+
+        userPreference = UserPreference.getInstance(dataStore)
+        checkSessionAndRedirect()
 
         binding.btnRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
@@ -89,6 +96,21 @@ class LoginActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
     }
+
+    private fun checkSessionAndRedirect() {
+        CoroutineScope(Dispatchers.Main).launch {
+            if (userPreference.isSessionActive()) {
+                goToMainActivity()
+            }
+        }
+    }
+
+    private fun goToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }

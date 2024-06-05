@@ -49,6 +49,10 @@ class Repository private constructor(
             }
     }
 
+    suspend fun logout() {
+        userPreference.logout()
+    }
+
 //    suspend fun getFinancialRecords(email: String): List<FinancialRecord> {
 //        val recordsFromApi = apiService.getFinancialRecords()
 //        recordsFromApi.forEach { record ->
