@@ -11,7 +11,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.budgetbonsai.Category
 import com.example.budgetbonsai.R
-import com.example.budgetbonsai.databinding.FragmentAddExpensesBinding
+import com.example.budgetbonsai.databinding.FragmentAddTransactionBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -19,14 +19,14 @@ import java.util.Locale
 
 class AddExpensesFragment : Fragment() {
 
-    private var _binding: FragmentAddExpensesBinding? = null
+    private var _binding: FragmentAddTransactionBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentAddExpensesBinding.inflate(inflater, container, false)
+        _binding = FragmentAddTransactionBinding.inflate(inflater, container, false)
         return binding.root
     }
 

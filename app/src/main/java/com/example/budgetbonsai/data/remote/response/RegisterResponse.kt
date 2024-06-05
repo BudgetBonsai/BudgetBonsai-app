@@ -2,7 +2,7 @@ package com.example.budgetbonsai.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterResponse1(
+data class RegisterResponse(
 
 	@field:SerializedName("data")
 	val data: RegisterResult? = null,
