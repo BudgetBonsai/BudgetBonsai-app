@@ -15,7 +15,7 @@ import com.example.budgetbonsai.data.remote.response.LoginResponse
 import com.example.budgetbonsai.data.remote.response.RegisterResponse
 import kotlinx.coroutines.flow.Flow
 
-class Repository private constructor(
+class Repository (
      val apiService: ApiService,
      val userPreference: UserPreference,
 ){

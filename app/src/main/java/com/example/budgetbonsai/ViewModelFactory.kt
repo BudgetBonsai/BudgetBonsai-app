@@ -8,6 +8,7 @@ import com.example.budgetbonsai.di.Injection
 import com.example.budgetbonsai.ui.MainViewModel
 import com.example.budgetbonsai.ui.login.LoginViewModel
 import com.example.budgetbonsai.ui.register.RegisterViewModel
+import com.example.budgetbonsai.ui.settings.SettingsViewModel
 import com.example.budgetbonsai.ui.transaction.TransactionRepository
 import com.example.budgetbonsai.ui.transaction.TransactionViewModel
 
@@ -23,6 +24,9 @@ class ViewModelFactory(private val repository: Repository): ViewModelProvider.Ne
         }
         if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
             return RegisterViewModel(repository) as T
+        }
+        if (modelClass.isAssignableFrom(SettingsViewModel::class.java)) {
+            return SettingsViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

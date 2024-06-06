@@ -33,24 +33,19 @@ class DailyFragment : Fragment() {
         binding = FragmentDailyBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Inisialisasi UserPreference
         userPreference = UserPreference.getInstance(requireContext().dataStore)
 
-        // Inisialisasi RecyclerView dan adapter
         adapter = TransactionAdapter(emptyList())
         binding.recyclerViewDaily.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewDaily.adapter = adapter
 
-        // Inisialisasi ViewModel
         val apiService = ApiConfig.getApiService(userPreference)
         val repository = TransactionRepository(apiService, userPreference)
         viewModel = ViewModelProvider(this, TransactionViewModelFactory(repository)).get(TransactionViewModel::class.java)
 
-        // Observasi LiveData dari ViewModel
         viewModel.transactionsLiveData.observe(viewLifecycleOwner, { result ->
             when (result) {
                 is Result.Loading -> {
-                    // Tampilkan indikator loading jika diperlukan
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is Result.Success -> {
@@ -59,13 +54,11 @@ class DailyFragment : Fragment() {
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    // Tampilkan pesan kesalahan kepada pengguna
                     Toast.makeText(requireContext(), "error min", Toast.LENGTH_SHORT).show()
                 }
             }
         })
 
-        // Panggil fungsi untuk mendapatkan transaksi dari ViewModel
         viewModel.getTransactions()
 
         return view

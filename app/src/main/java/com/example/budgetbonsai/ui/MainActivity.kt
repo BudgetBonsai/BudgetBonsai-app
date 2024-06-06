@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.budgetbonsai.R
 import com.example.budgetbonsai.ViewModelFactory
 import com.example.budgetbonsai.databinding.ActivityMainBinding
+import com.example.budgetbonsai.ui.settings.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.settingsFragment -> {
-                    // Respond to navigation item 4 click
+
                     true
                 }
                 else -> false
