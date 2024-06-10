@@ -72,12 +72,13 @@ class LoginActivity : AppCompatActivity() {
 
                         is Result.Success -> {
                             showLoading(false)
-                            val token = it.data.data?.token.toString()
                             val name = it.data.data?.name.toString()
+                            val token = it.data.data?.token.toString()
                             viewModel.saveSession(
                                 UserModel(
                                     name,
-                                    token
+                                    token,
+                                    email
                                 )
                             )
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
