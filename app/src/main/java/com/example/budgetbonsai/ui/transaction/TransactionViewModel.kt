@@ -17,7 +17,7 @@ class TransactionViewModel(private val repository: TransactionRepository) : View
     val transactionsLiveData: LiveData<Result<List<DataItem>>> = _transactionsLiveData
 
     fun getTransactions() {
-        _transactionsLiveData.value = Result.Loading // Set loading state
+        _transactionsLiveData.value = Result.Loading
         viewModelScope.launch {
             try {
                 val result = repository.getTransactions()

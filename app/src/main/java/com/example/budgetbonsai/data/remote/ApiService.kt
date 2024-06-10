@@ -35,9 +35,9 @@ interface ApiService {
         @Field("password") password: String
     ): LoginResponse
 
-    @POST("expense")
+    @POST("transaction")
     fun addTransaction(@Body transaction: Transaction): Call<AddTransactionResponse>
 
-    @GET("expense")
+    @GET("transaction")
     suspend fun getTransactions(): GetTransactionResponse
 }

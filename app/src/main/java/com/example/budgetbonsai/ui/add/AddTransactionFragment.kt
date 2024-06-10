@@ -87,8 +87,12 @@ class AddTransactionFragment : Fragment() {
             val name = binding.edtInputname.text.toString()
             val amount = binding.edtInputamount.text.toString()
             val category = binding.autoCompleteTextView.text.toString()
-
-            val transaction = Transaction(date, name, amount, category)
+            val type = when (binding.toggleButton.checkedButtonId) {
+                R.id.btn_income -> "Income"
+                R.id.btn_expense -> "Outcome"
+                else -> ""
+            }
+            val transaction = Transaction(date, name, amount, category, type)
             sendTransactionToApi(transaction)
         }
     }

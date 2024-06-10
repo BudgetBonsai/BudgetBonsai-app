@@ -40,6 +40,9 @@ data class Data(
 	@field:SerializedName("category")
 	val category: String? = null,
 
+	@field:SerializedName("type")
+	val type: String? = null,
+
 	@field:SerializedName("userId")
 	val userId: String? = null
 )
