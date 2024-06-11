@@ -27,6 +27,13 @@
             style="@style/TextAppearance.Material3.TitleMedium"/>
 
         <TextView
+            android:id="@+id/tv_wishlist_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:text="You currently saved $0.00 out of $500.0"/>
+
+        <TextView
             android:id="@+id/tv_deadline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +66,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
             <ImageButton
-                android:id="@+id/editWishlist"
+                android:id="@+id/btn_edit_wishlist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_edit_24"
@@ -71,11 +78,11 @@
                 android:contentDescription="Edit Wishlist"
                 android:layout_gravity="end"/>
             <ImageButton
-                android:id="@+id/delWishlist"
+                android:id="@+id/btn_del_wishlist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_delete_24"
-                android:layout_toLeftOf="@id/editWishlist"
+                android:layout_toLeftOf="@id/btn_edit_wishlist"
                 android:layout_alignTop="@id/btn_deposit"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="16dp"

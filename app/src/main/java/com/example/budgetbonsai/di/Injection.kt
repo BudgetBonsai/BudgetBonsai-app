@@ -13,4 +13,10 @@ object Injection {
 
         return Repository.getInstance(apiService, pref)
     }
+    fun provideWishlistRepository(context: Context): Repository {
+        val pref = UserPreference.getInstance(context.dataStore)
+        val apiService = ApiConfig.getApiService(pref)
+
+        return Repository.getInstance(apiService, pref)
+    }
 }

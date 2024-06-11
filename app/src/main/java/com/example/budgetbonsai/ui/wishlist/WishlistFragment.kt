@@ -5,21 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbonsai.DepositFragment
 import com.example.budgetbonsai.R
+import androidx.lifecycle.Observer
+import com.example.budgetbonsai.ViewModelFactory
 import com.example.budgetbonsai.Wishlist
 import com.example.budgetbonsai.WishlistAdapter
+import com.example.budgetbonsai.WishlistViewModelFactory
 import com.example.budgetbonsai.WithdrawFragment
+import com.example.budgetbonsai.data.Repository
+import com.example.budgetbonsai.data.WishlistRepository
+import com.example.budgetbonsai.data.local.room.WishlistDao
+import com.example.budgetbonsai.data.local.room.WishlistDatabase
+import com.example.budgetbonsai.data.model.WishlistTest
+import com.example.budgetbonsai.data.remote.ApiConfig
+import com.example.budgetbonsai.ui.WishlistAdapterTest
+import com.example.budgetbonsai.ui.settings.SettingsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WishlistFragment : Fragment() {
 
     private var recyclerView: RecyclerView? = null
-    private lateinit var wishlistAdapter: WishlistAdapter
-    private lateinit var wishlist: List<Wishlist>
+    private lateinit var wishlistAdapter: WishlistAdapterTest
+    private lateinit var viewModel: WishlistViewModel
+//    private lateinit var wishlist: List<Wishlist>
+    private lateinit var wishlist: List<WishlistTest>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,21 +46,37 @@ class WishlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val applicationContext = requireActivity().applicationContext
+        val dao = WishlistDatabase.getDatabase(applicationContext).wishlistDao()
+        val repository = WishlistRepository(dao)
+
+        val viewModelFactory = WishlistViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(WishlistViewModel::class.java)
+
         recyclerView = view.findViewById(R.id.rv_wishlist)
         recyclerView?.layoutManager = LinearLayoutManager(context)
 
-        // Prepare data
-        wishlist = listOf(
-            Wishlist("Laptop", 1000.0, 100.0, "2021-12-31"),
-            Wishlist("Smartphone", 500.0, 50.0, "2021-12-31"),
-            Wishlist("Smartwatch", 300.0, 30.0, "2021-12-31"),
-            Wishlist("Tablet", 200.0, 20.0, "2021-12-31"),
-            Wishlist("Headphone", 100.0, 10.0, "2021-12-31")
-        )
-
-        // Set adapter
-        wishlistAdapter = WishlistAdapter(requireContext(), wishlist)
-        recyclerView?.adapter = wishlistAdapter
+        viewModel.allWishlist.observe(viewLifecycleOwner, Observer { wishlists ->
+            wishlistAdapter = WishlistAdapterTest(
+                requireContext(),
+                wishlists,
+                onDepositClick = { item ->
+                    val depositFragment = DepositFragment()
+                    depositFragment.show(parentFragmentManager, "DepositFragment")
+                },
+                onWithdrawClick = { item ->
+                    val withdrawFragment = WithdrawFragment()
+                    withdrawFragment.show(parentFragmentManager, "WithdrawFragment")
+                },
+                onEditClick = { item ->
+                    // Implementasi saat item diedit
+                },
+                onDeleteClick = { item ->
+                    // Implementasi saat item dihapus
+                }
+            )
+            recyclerView?.adapter = wishlistAdapter
+        })
 
         val fab = view.findViewById<FloatingActionButton>(R.id.fab_add)
         fab.setOnClickListener {
@@ -53,28 +84,6 @@ class WishlistFragment : Fragment() {
             findNavController().navigate(R.id.action_wishlistFragment_to_addFragment)
         }
     }
-
-//    override fun onDepositClick(item: Wishlist) {val fragment = DepositFragment()
-//        val bundle = Bundle()
-//        bundle.putString("wishlist_name", item.name)
-//        fragment.arguments = bundle
-//
-//        parentFragmentManager.beginTransaction()
-//            .add(R.id.nav_host_fragment, fragment)
-//            .addToBackStack(null)
-//            .commit()
-//    }
-//
-//    override fun onWithdrawClick(item: Wishlist) {
-//        val fragment = WithdrawFragment()
-//        val bundle = Bundle()
-//        bundle.putString("wishlist_name", item.name)
-//        fragment.arguments = bundle
-//        parentFragmentManager.beginTransaction()
-//            .replace(R.id.nav_host_fragment, fragment)
-//            .addToBackStack(null)
-//            .commit()
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
