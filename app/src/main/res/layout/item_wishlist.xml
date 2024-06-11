@@ -33,10 +33,9 @@
             android:paddingHorizontal="8dp"
             android:text="You have until 12/31/2021 to finish this wishlist"/>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/btn_deposit"
@@ -44,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Deposit"
+                android:layout_alignParentStart="true"
                 android:textColor="#C0D99E" />
 
             <Button
@@ -51,10 +51,38 @@
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/btn_deposit"
                 android:text="Withdraw"
                 android:textColor="@color/design_default_color_error" />
-        </LinearLayout>
-
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <ImageButton
+                android:id="@+id/editWishlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_edit_24"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/btn_deposit"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Edit Wishlist"
+                android:layout_gravity="end"/>
+            <ImageButton
+                android:id="@+id/delWishlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_delete_24"
+                android:layout_toLeftOf="@id/editWishlist"
+                android:layout_alignTop="@id/btn_deposit"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Delete Wishlist"
+                android:layout_gravity="end"/>
+        </RelativeLayout>
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

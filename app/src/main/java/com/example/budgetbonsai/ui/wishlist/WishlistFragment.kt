@@ -15,7 +15,7 @@ import com.example.budgetbonsai.WishlistAdapter
 import com.example.budgetbonsai.WithdrawFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class WishlistFragment : Fragment(), WishlistAdapter.OnItemClickListener {
+class WishlistFragment : Fragment() {
 
     private var recyclerView: RecyclerView? = null
     private lateinit var wishlistAdapter: WishlistAdapter
@@ -44,7 +44,7 @@ class WishlistFragment : Fragment(), WishlistAdapter.OnItemClickListener {
         )
 
         // Set adapter
-        wishlistAdapter = WishlistAdapter(wishlist, this)
+        wishlistAdapter = WishlistAdapter(requireContext(), wishlist)
         recyclerView?.adapter = wishlistAdapter
 
         val fab = view.findViewById<FloatingActionButton>(R.id.fab_add)
@@ -54,31 +54,30 @@ class WishlistFragment : Fragment(), WishlistAdapter.OnItemClickListener {
         }
     }
 
-    override fun onDepositClick(item: Wishlist) {val fragment = DepositFragment()
-        val bundle = Bundle()
-        bundle.putString("wishlist_name", item.name)
-        fragment.arguments = bundle
-
-        // Menggunakan add() untuk menambahkan DepositFragment ke dalam back stack
-        parentFragmentManager.beginTransaction()
-            .add(R.id.nav_host_fragment, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
-
-    override fun onWithdrawClick(item: Wishlist) {
-        val fragment = WithdrawFragment()
-        val bundle = Bundle()
-        bundle.putString("wishlist_name", item.name)
-        fragment.arguments = bundle
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
+//    override fun onDepositClick(item: Wishlist) {val fragment = DepositFragment()
+//        val bundle = Bundle()
+//        bundle.putString("wishlist_name", item.name)
+//        fragment.arguments = bundle
+//
+//        parentFragmentManager.beginTransaction()
+//            .add(R.id.nav_host_fragment, fragment)
+//            .addToBackStack(null)
+//            .commit()
+//    }
+//
+//    override fun onWithdrawClick(item: Wishlist) {
+//        val fragment = WithdrawFragment()
+//        val bundle = Bundle()
+//        bundle.putString("wishlist_name", item.name)
+//        fragment.arguments = bundle
+//        parentFragmentManager.beginTransaction()
+//            .replace(R.id.nav_host_fragment, fragment)
+//            .addToBackStack(null)
+//            .commit()
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        recyclerView = null // Avoid memory leaks
+        recyclerView = null
     }
 }

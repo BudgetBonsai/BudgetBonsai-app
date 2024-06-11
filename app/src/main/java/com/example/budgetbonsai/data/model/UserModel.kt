@@ -8,8 +8,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class UserModel(
     var name: String,
-    var token: String,
     var email: String,
+    var token: String,
     var isLogin: Boolean = false
 ) : Parcelable
 

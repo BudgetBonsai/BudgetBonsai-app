@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".WithdrawFragment"
+    android:layout_height="wrap_content"
+    tools:context=".DepositFragment"
     android:orientation="vertical">
 
     <ImageButton
@@ -23,7 +23,7 @@
         android:layout_marginTop="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_inputwithdrawdate"
+            android:id="@+id/edt_inputdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
@@ -31,7 +31,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/withdrawwishlistamount"
+        android:id="@+id/wishlistamount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Amount"
@@ -39,17 +39,17 @@
         android:layout_marginHorizontal="64dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/til_wishlist_addwithdrawamount"
+            android:id="@+id/til_wishlist_addamount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_do_withdraw"
+        android:id="@+id/btn_do_deposit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Withdraw"
+        android:text="Deposit"
         android:textSize="20sp"
         android:layout_marginTop="32dp"
         android:layout_marginHorizontal="64dp"

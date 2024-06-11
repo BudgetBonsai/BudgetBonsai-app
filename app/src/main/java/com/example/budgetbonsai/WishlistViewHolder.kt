@@ -8,16 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 class WishlistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val tvWishlistName: TextView = itemView.findViewById(R.id.tv_wishlist_name)
     val tvDeadline: TextView = itemView.findViewById(R.id.tv_deadline)
-    val depositButton: Button = itemView.findViewById(R.id.btn_deposit)
-    val withdrawButton: Button = itemView.findViewById(R.id.btn_withdraw)
+    val btnDeposit: Button = itemView.findViewById(R.id.btn_deposit)
+    val btnWithdraw: Button = itemView.findViewById(R.id.btn_withdraw)
 
     fun setOnClickListener(listener: (Int) -> Unit) {
-        depositButton.setOnClickListener { listener(R.id.btn_deposit) }
-        withdrawButton.setOnClickListener { listener(R.id.btn_withdraw) }
+        btnDeposit.setOnClickListener { listener(R.id.btn_deposit) }
+        btnWithdraw.setOnClickListener { listener(R.id.btn_withdraw) }
     }
 
     fun bind(item: Wishlist) {
         tvWishlistName.text = item.name
-        tvWishlistName.text = item.deadline
+        tvDeadline.text = item.deadline
     }
 }
