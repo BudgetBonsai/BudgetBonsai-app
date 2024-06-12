@@ -1,4 +1,4 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.ui.wishlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
+import com.example.budgetbonsai.R
 
-class DepositFragment : DialogFragment() {
+class WithdrawFragment : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_deposit, container, false)
+        return inflater.inflate(R.layout.fragment_withdraw, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,6 +33,7 @@ class DepositFragment : DialogFragment() {
     }
 
     companion object {
-        const val TAG = "DepositDialogFragment"
+        const val TAG = "WithdrawDialogFragment"
     }
+
 }

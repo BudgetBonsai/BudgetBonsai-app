@@ -8,11 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.budgetbonsai.DepositFragment
 import com.example.budgetbonsai.R
-import com.example.budgetbonsai.Wishlist
-import com.example.budgetbonsai.WishlistAdapter
-import com.example.budgetbonsai.WithdrawFragment
+import com.example.budgetbonsai.data.model.Wishlist
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WishlistFragment : Fragment() {

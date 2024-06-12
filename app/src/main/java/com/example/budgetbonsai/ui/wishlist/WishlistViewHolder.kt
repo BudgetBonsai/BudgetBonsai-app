@@ -1,9 +1,11 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.ui.wishlist
 
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.budgetbonsai.R
+import com.example.budgetbonsai.data.model.Wishlist
 
 class WishlistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val tvWishlistName: TextView = itemView.findViewById(R.id.tv_wishlist_name)

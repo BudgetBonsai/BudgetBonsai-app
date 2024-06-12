@@ -36,9 +36,10 @@
                     android:padding="8dp"
                     style="@style/TextAppearance.MyApp.TitleMedium"/>
                 <TextView
+                    android:id="@+id/tv_income_amount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="$1,200"
+                    android:text="$0.00"
                     android:paddingHorizontal="8dp"
                     style="@style/TextAppearance.MyApp.TitleLarge"/>
             </LinearLayout>
@@ -62,9 +63,10 @@
                     android:padding="8dp"
                     style="@style/TextAppearance.MyApp.TitleMedium"/>
                 <TextView
+                    android:id="@+id/tv_outcome_amount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="$1,200"
+                    android:text="$0.00"
                     android:layout_gravity="bottom"
                     android:paddingHorizontal="8dp"
                     style="@style/TextAppearance.MyApp.TitleLarge"/>
@@ -89,6 +91,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/piechart"
             android:layout_width="match_parent"

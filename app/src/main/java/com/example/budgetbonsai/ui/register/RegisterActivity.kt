@@ -10,12 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.budgetbonsai.R
-import com.example.budgetbonsai.Result
+import com.example.budgetbonsai.utils.Result
 import com.example.budgetbonsai.ViewModelFactory
 import com.example.budgetbonsai.databinding.ActivityRegisterBinding
 import com.example.budgetbonsai.ui.landing.LandingActivity
 import com.example.budgetbonsai.ui.login.LoginActivity
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class RegisterActivity : AppCompatActivity() {
 

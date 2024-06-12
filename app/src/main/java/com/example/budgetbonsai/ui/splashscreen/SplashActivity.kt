@@ -1,13 +1,12 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.ui.splashscreen
 
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.budgetbonsai.ui.MainActivity
+import com.example.budgetbonsai.R
 import com.example.budgetbonsai.ui.landing.LandingActivity
-import com.example.budgetbonsai.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
     private val viewModel: SplashViewModel by viewModels()

@@ -9,9 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.datastore.dataStore
 import androidx.lifecycle.lifecycleScope
-import com.example.budgetbonsai.Category
+import com.example.budgetbonsai.utils.Category
 import com.example.budgetbonsai.R
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.local.dataStore
@@ -21,7 +20,6 @@ import com.example.budgetbonsai.data.remote.response.AddTransactionResponse
 import com.example.budgetbonsai.databinding.FragmentAddTransactionBinding
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date

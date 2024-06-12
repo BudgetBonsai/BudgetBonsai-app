@@ -6,70 +6,68 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
 import com.example.budgetbonsai.R
-import com.example.budgetbonsai.TransactionAdapter
-import com.example.budgetbonsai.ViewPagerAdapter
-import com.example.budgetbonsai.data.Repository
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.local.dataStore
 import com.example.budgetbonsai.data.remote.ApiConfig
-import com.example.budgetbonsai.data.remote.ApiService
+import com.example.budgetbonsai.utils.Result
+import com.example.budgetbonsai.data.TransactionRepository
+import com.example.budgetbonsai.data.remote.response.DataItem
 import com.example.budgetbonsai.databinding.FragmentTransactionBinding
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import retrofit2.Retrofit
 
 class TransactionFragment : Fragment() {
 
     private lateinit var binding: FragmentTransactionBinding
-    private lateinit var pieChart: PieChart
     private lateinit var viewModel: TransactionViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = FragmentTransactionBinding.inflate(layoutInflater)
-
-        val userPreference = UserPreference.getInstance(requireContext().dataStore)
-        val apiService = ApiConfig.getApiService(userPreference)
-        val repository = TransactionRepository(apiService, userPreference)
-        viewModel = ViewModelProvider(this, TransactionViewModelFactory(repository)).get(TransactionViewModel::class.java)
-
-//        pieChart = binding.piechart
-
-//        val list: ArrayList<PieEntry> = ArrayList()
-//
-//        list.add(PieEntry(30f, "Food"))
-//        list.add(PieEntry(20f, "Transport"))
-//        list.add(PieEntry(10f, "Entertainment"))
-//        list.add(PieEntry(40f, "Others"))
-//
-//        val pieDataset = PieDataSet(list, "Expenses")
-//        pieDataset.setColors(ColorTemplate.MATERIAL_COLORS, 255)
-//        pieDataset.valueTextSize = 15f
-//        pieDataset.valueTextColor = Color.BLACK
-//
-//        val pieData = PieData(pieDataset)
-//
-//        pieChart.data = pieData
-//
-//        pieChart.animateY(2000)
-    }
+    private lateinit var pieChart: PieChart
+    private lateinit var adapter: TransactionAdapter
+    private lateinit var userPreference: UserPreference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_transaction, container, false)
         binding = FragmentTransactionBinding.inflate(inflater, container, false)
+
+        userPreference = UserPreference.getInstance(requireContext().dataStore)
+        adapter = TransactionAdapter(emptyList())
+
+        val apiService = ApiConfig.getApiService(userPreference)
+        val repository = TransactionRepository(apiService, userPreference)
+        viewModel = ViewModelProvider(this, TransactionViewModelFactory(repository)).get(TransactionViewModel::class.java)
+
+        viewModel.transactionsLiveData.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+
+                is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    adapter.setItems(result.data)
+                }
+
+                is Result.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        }
+
+        viewModel.totals.observe(viewLifecycleOwner) { (income, expense) ->
+            binding.tvIncomeAmount.text = "$income"
+            binding.tvOutcomeAmount.text = "$expense"
+        }
+
+        viewModel.getTransactions()
+
         return binding.root
     }
 
@@ -78,61 +76,23 @@ class TransactionFragment : Fragment() {
 
         setupTabLayoutAndViewPager()
 
-        val pieChart = view.findViewById<PieChart>(R.id.piechart)
-        val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
-        val viewPager = view.findViewById<ViewPager2>(R.id.viewPager)
+        pieChart = view.findViewById(R.id.piechart)
 
-        val list: ArrayList<PieEntry> = ArrayList()
-
-        list.add(PieEntry(30f, "Food"))
-        list.add(PieEntry(20f, "Transport"))
-        list.add(PieEntry(10f, "Entertainment"))
-        list.add(PieEntry(40f, "Others"))
-
-        val pieDataset = PieDataSet(list, "Expenses")
-        pieDataset.setColors(ColorTemplate.MATERIAL_COLORS, 255)
-        pieDataset.valueTextSize = 15f
-        pieDataset.valueTextColor = Color.BLACK
-
-        val pieData = PieData(pieDataset)
-
-        pieChart.data = pieData
-
-        pieChart.description.text = "Expenses Pie Chart"
-        pieChart.animateY(1000)
-
-        val adapter = ViewPagerAdapter(this)
-        viewPager.adapter = adapter
-
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            when (position) {
-                0 -> {
-                    tab.text = "Daily"
+        viewModel.transactionsLiveData.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
                 }
-                1 -> {
-                    tab.text = "Weekly"
+                is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    updatePieChart(result.data)
                 }
-                2 -> {
-                    tab.text = "Monthly"
+                is Result.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Pie Chart Load Error", Toast.LENGTH_SHORT).show()
                 }
             }
-        }.attach()
-
-//        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//
-//            override fun onTabSelected(tab: TabLayout.Tab?) {
-//                // Handle tab select
-//            }
-//
-//            override fun onTabReselected(tab: TabLayout.Tab?) {
-//                // Handle tab reselect
-//            }
-//
-//            override fun onTabUnselected(tab: TabLayout.Tab?) {
-//                // Handle tab unselect
-//            }
-//        })
-
+        }
     }
 
     private fun setupTabLayoutAndViewPager() {
@@ -150,5 +110,28 @@ class TransactionFragment : Fragment() {
                 else -> null
             }
         }.attach()
+    }
+
+    private fun updatePieChart(transactions: List<DataItem>) {
+        val categoryTotals = mutableMapOf<String, Float>()
+
+        transactions.forEach { transaction ->
+            val amount = transaction.amount?.toFloat() ?: 0f
+            val category = transaction.category ?: "Others"
+            categoryTotals[category] = categoryTotals.getOrDefault(category, 0f) + amount
+        }
+
+        val pieEntries = categoryTotals.map { PieEntry(it.value, it.key) }
+        val pieDataset = PieDataSet(pieEntries, "Expenses")
+        pieDataset.setColors(ColorTemplate.MATERIAL_COLORS, 255)
+        pieDataset.valueTextSize = 15f
+        pieDataset.valueTextColor = Color.BLACK
+
+        val pieData = PieData(pieDataset)
+        pieChart.data = pieData
+
+        pieChart.description.isEnabled = false
+
+        pieChart.animateY(1000)
     }
 }

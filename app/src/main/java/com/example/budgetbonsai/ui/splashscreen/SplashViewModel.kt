@@ -1,4 +1,4 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.ui.splashscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.data.model
 
 data class Wishlist (
     val name: String,

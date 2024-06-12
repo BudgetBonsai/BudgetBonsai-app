@@ -3,7 +3,7 @@ package com.example.budgetbonsai.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.budgetbonsai.Result
+import com.example.budgetbonsai.utils.Result
 import com.example.budgetbonsai.data.Repository
 import com.example.budgetbonsai.data.model.UserModel
 import com.example.budgetbonsai.data.remote.response.LoginResponse

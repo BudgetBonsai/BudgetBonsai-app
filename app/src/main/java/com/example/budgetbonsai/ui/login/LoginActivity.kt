@@ -11,14 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.budgetbonsai.R
-import com.example.budgetbonsai.Result
+import com.example.budgetbonsai.utils.Result
 import com.example.budgetbonsai.ViewModelFactory
 import com.example.budgetbonsai.data.model.UserModel
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.local.dataStore
 import com.example.budgetbonsai.databinding.ActivityLoginBinding
 import com.example.budgetbonsai.ui.MainActivity
-import com.example.budgetbonsai.ui.MainViewModel
 import com.example.budgetbonsai.ui.register.RegisterActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

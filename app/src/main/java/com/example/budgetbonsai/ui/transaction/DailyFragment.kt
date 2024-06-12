@@ -8,15 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.budgetbonsai.R
-import com.example.budgetbonsai.TransactionAdapter
-import com.example.budgetbonsai.ViewPagerAdapter
-import com.example.budgetbonsai.data.Repository
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.remote.ApiConfig
 import com.example.budgetbonsai.databinding.FragmentDailyBinding
-import com.example.budgetbonsai.Result
+import com.example.budgetbonsai.utils.Result
+import com.example.budgetbonsai.data.TransactionRepository
 import com.example.budgetbonsai.data.local.dataStore
 
 class DailyFragment : Fragment() {
@@ -43,21 +39,24 @@ class DailyFragment : Fragment() {
         val repository = TransactionRepository(apiService, userPreference)
         viewModel = ViewModelProvider(this, TransactionViewModelFactory(repository)).get(TransactionViewModel::class.java)
 
-        viewModel.transactionsLiveData.observe(viewLifecycleOwner, { result ->
+        viewModel.transactionsLiveData.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
+
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     adapter.setItems(result.data)
                 }
+
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "error min", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "There are no Transaction", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
-        })
+        }
 
         viewModel.getTransactions()
 

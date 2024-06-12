@@ -1,4 +1,4 @@
-package com.example.budgetbonsai
+package com.example.budgetbonsai.ui.transaction
 
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil

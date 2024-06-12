@@ -5,12 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
-import com.example.budgetbonsai.Category
-import com.example.budgetbonsai.R
 import com.example.budgetbonsai.databinding.FragmentAddWishlistBinding
 
 class AddWishlistFragment : Fragment() {

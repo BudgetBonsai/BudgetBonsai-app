@@ -9,8 +9,6 @@ import com.example.budgetbonsai.ui.MainViewModel
 import com.example.budgetbonsai.ui.login.LoginViewModel
 import com.example.budgetbonsai.ui.register.RegisterViewModel
 import com.example.budgetbonsai.ui.settings.SettingsViewModel
-import com.example.budgetbonsai.ui.transaction.TransactionRepository
-import com.example.budgetbonsai.ui.transaction.TransactionViewModel
 
 class ViewModelFactory(private val repository: Repository): ViewModelProvider.NewInstanceFactory() {
 

@@ -2,7 +2,7 @@ package com.example.budgetbonsai.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class GetTransactionResponse(
+data class Response(
 
 	@field:SerializedName("data")
 	val data: List<DataItem?>? = null,
@@ -14,19 +14,10 @@ data class GetTransactionResponse(
 	val message: String? = null
 )
 
-data class DateGet(
-
-	@field:SerializedName("seconds")
-	val seconds: Int? = null,
-
-	@field:SerializedName("nanoseconds")
-	val nanoseconds: Int? = null
-)
-
-data class DataItem(
+data class DataIstem(
 
 	@field:SerializedName("date")
-	val date: DateGet? = null,
+	val date: Date? = null,
 
 	@field:SerializedName("amount")
 	val amount: Int? = null,
@@ -45,4 +36,13 @@ data class DataItem(
 
 	@field:SerializedName("userId")
 	val userId: String? = null
+)
+
+data class Date(
+
+	@field:SerializedName("seconds")
+	val seconds: Int? = null,
+
+	@field:SerializedName("nanoseconds")
+	val nanoseconds: Int? = null
 )

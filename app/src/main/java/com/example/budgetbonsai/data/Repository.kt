@@ -2,14 +2,12 @@ package com.example.budgetbonsai.data
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.remote.ApiService
 import retrofit2.HttpException
-import com.example.budgetbonsai.Result
+import com.example.budgetbonsai.utils.Result
 import com.example.budgetbonsai.data.model.UserModel
-import com.example.budgetbonsai.data.remote.response.DataItem
 import com.example.budgetbonsai.data.remote.response.GetTransactionResponse
 import com.example.budgetbonsai.data.remote.response.LoginResponse
 import com.example.budgetbonsai.data.remote.response.RegisterResponse
