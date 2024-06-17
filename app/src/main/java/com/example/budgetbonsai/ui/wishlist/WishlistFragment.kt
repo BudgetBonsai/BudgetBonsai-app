@@ -5,44 +5,75 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.budgetbonsai.R
+import com.example.budgetbonsai.ViewModelFactory
+import com.example.budgetbonsai.data.local.UserPreference
+import com.example.budgetbonsai.data.local.dataStore
 import com.example.budgetbonsai.data.model.Wishlist
+import com.example.budgetbonsai.data.remote.ApiConfig
+import com.example.budgetbonsai.databinding.FragmentWishlistBinding
+import com.example.budgetbonsai.repository.TransactionRepository
+import com.example.budgetbonsai.repository.WishlistRepository
+import com.example.budgetbonsai.ui.transaction.TransactionAdapter
+import com.example.budgetbonsai.ui.transaction.TransactionViewModel
+import com.example.budgetbonsai.ui.transaction.TransactionViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WishlistFragment : Fragment() {
 
+    private var _binding: FragmentWishlistBinding? = null
+    private val binding get() = _binding!!
     private var recyclerView: RecyclerView? = null
-    private lateinit var wishlistAdapter: WishlistAdapter
+    private lateinit var viewModel: WishlistViewModel
+    private lateinit var userPreference: UserPreference
+    private lateinit var adapter: WishlistAdapter
     private lateinit var wishlist: List<Wishlist>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_wishlist, container, false)
+        _binding = FragmentWishlistBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        userPreference = UserPreference.getInstance(requireContext().dataStore)
+        adapter = WishlistAdapter(requireContext(), emptyList())
+        binding.rvWishlist.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvWishlist.adapter = adapter
+
+        val apiService = ApiConfig.getApiService(userPreference)
+        val repository = WishlistRepository(apiService)
+        viewModel = ViewModelProvider(this, WishlistViewModel.WishlistViewModelFactory(repository)).get(WishlistViewModel::class.java)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.rv_wishlist)
+//        recyclerView = view.findViewById(R.id.rv_wishlist)
+        recyclerView = binding.rvWishlist
         recyclerView?.layoutManager = LinearLayoutManager(context)
 
-        // Prepare data
-        wishlist = listOf(
-            Wishlist("Laptop", 1000.0, 100.0, "2021-12-31"),
-            Wishlist("Smartphone", 500.0, 50.0, "2021-12-31"),
-            Wishlist("Smartwatch", 300.0, 30.0, "2021-12-31"),
-            Wishlist("Tablet", 200.0, 20.0, "2021-12-31"),
-            Wishlist("Headphone", 100.0, 10.0, "2021-12-31")
-        )
-
         // Set adapter
-        wishlistAdapter = WishlistAdapter(requireContext(), wishlist)
-        recyclerView?.adapter = wishlistAdapter
+//        wishlistAdapter = WishlistAdapter(requireContext(), wishlist)
+//        recyclerView?.adapter = wishlistAdapter
+
+        viewModel.wishlist.observe(viewLifecycleOwner, Observer { wishlist ->
+            if (wishlist.isNotEmpty()) {
+                val adapter = WishlistAdapter(requireContext(), wishlist)
+                binding.rvWishlist.adapter = adapter
+            }
+        })
+
+        viewModel.fetchWishlist()
 
         val fab = view.findViewById<FloatingActionButton>(R.id.fab_add)
         fab.setOnClickListener {

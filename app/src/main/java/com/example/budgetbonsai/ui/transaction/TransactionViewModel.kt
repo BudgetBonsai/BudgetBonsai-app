@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.budgetbonsai.utils.Result
-import com.example.budgetbonsai.data.TransactionRepository
+import com.example.budgetbonsai.repository.TransactionRepository
 import com.example.budgetbonsai.data.remote.response.DataItem
 import kotlinx.coroutines.launch
 

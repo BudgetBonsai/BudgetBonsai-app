@@ -1,7 +1,7 @@
 package com.example.budgetbonsai.di
 
 import android.content.Context
-import com.example.budgetbonsai.data.Repository
+import com.example.budgetbonsai.repository.Repository
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.local.dataStore
 import com.example.budgetbonsai.data.remote.ApiConfig

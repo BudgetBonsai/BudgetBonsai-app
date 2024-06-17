@@ -1,9 +1,8 @@
 package com.example.budgetbonsai.ui.settings
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.budgetbonsai.data.Repository
+import com.example.budgetbonsai.repository.Repository
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(private val repository: Repository) : ViewModel() {

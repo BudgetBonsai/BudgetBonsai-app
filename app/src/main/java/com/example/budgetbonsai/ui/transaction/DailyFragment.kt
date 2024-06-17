@@ -12,7 +12,7 @@ import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.remote.ApiConfig
 import com.example.budgetbonsai.databinding.FragmentDailyBinding
 import com.example.budgetbonsai.utils.Result
-import com.example.budgetbonsai.data.TransactionRepository
+import com.example.budgetbonsai.repository.TransactionRepository
 import com.example.budgetbonsai.data.local.dataStore
 
 class DailyFragment : Fragment() {

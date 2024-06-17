@@ -1,4 +1,4 @@
-package com.example.budgetbonsai.data
+package com.example.budgetbonsai.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

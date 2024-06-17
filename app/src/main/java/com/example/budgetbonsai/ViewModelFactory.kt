@@ -3,7 +3,7 @@ package com.example.budgetbonsai
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.budgetbonsai.data.Repository
+import com.example.budgetbonsai.repository.Repository
 import com.example.budgetbonsai.di.Injection
 import com.example.budgetbonsai.ui.MainViewModel
 import com.example.budgetbonsai.ui.login.LoginViewModel

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.budgetbonsai.R
 import com.example.budgetbonsai.ViewModelFactory
-import com.example.budgetbonsai.data.Repository
+import com.example.budgetbonsai.repository.Repository
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.local.dataStore
 import com.example.budgetbonsai.data.remote.ApiConfig
