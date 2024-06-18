@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbonsai.data.remote.response.WishlistItem
 import com.example.budgetbonsai.databinding.ItemWishlistBinding
 
-class WishlistAdapter(private val context: Context, private var wishlist: List<WishlistItem>) : RecyclerView.Adapter<WishlistViewHolder>() {
+class WishlistAdapter(private val context: Context, private var wishlist: List<WishlistItem>, private val onDeleteClick: (WishlistItem) -> Unit) : RecyclerView.Adapter<WishlistViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistViewHolder {
         val binding = ItemWishlistBinding.inflate(
@@ -23,6 +23,9 @@ class WishlistAdapter(private val context: Context, private var wishlist: List<W
         }
         holder.btnWithdraw.setOnClickListener {
             showWithdrawDialog()
+        }
+        holder.btnDelWishlist.setOnClickListener {
+            onDeleteClick(wishlist[position])
         }
         holder.bind(wishlist[position])
     }

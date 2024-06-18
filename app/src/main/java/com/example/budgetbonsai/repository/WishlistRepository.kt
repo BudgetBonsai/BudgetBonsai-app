@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.budgetbonsai.data.remote.ApiService
 import com.example.budgetbonsai.data.remote.response.AddWishlistResponse
+import com.example.budgetbonsai.data.remote.response.DeleteResponse
 import com.example.budgetbonsai.data.remote.response.WishlistItem
 import com.example.budgetbonsai.utils.Result
 import com.example.budgetbonsai.data.remote.response.WishlistResponse
@@ -42,6 +43,19 @@ class WishlistRepository(private val apiService: ApiService) {
         file: MultipartBody.Part
     ): AddWishlistResponse {
         return apiService.addWishlist(name, amount, savingPlan, type, file)
+    }
+
+    suspend fun deleteWishlist(id: String): Result<DeleteResponse> {
+        return try {
+            val response = apiService.deleteWishlist(id)
+            if (response.isSuccessful) {
+                Result.Success(response.body()!!)
+            } else {
+                Result.Error("Failed to delete wishlist: ${response.message()}")
+            }
+        } catch (e: Exception) {
+            Result.Error("Failed to delete wishlist")
+        }
     }
 
 //    suspend fun addWishlist(name: String, amount: Int, savingPlan: String, type: String, file: String): LiveData<Result<AddWishlistResponse>> {

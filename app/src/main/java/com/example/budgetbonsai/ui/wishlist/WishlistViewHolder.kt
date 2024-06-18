@@ -2,6 +2,7 @@ package com.example.budgetbonsai.ui.wishlist
 
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,6 +14,7 @@ class WishlistViewHolder(private val binding: ItemWishlistBinding) : RecyclerVie
 
     val btnDeposit: Button = binding.btnDeposit
     val btnWithdraw: Button = binding.btnWithdraw
+    val btnDelWishlist: ImageButton = binding.btnDelWishlist
 
     fun setOnClickListener(listener: (Int) -> Unit) {
         binding.btnDeposit.setOnClickListener { listener(R.id.btn_deposit) }

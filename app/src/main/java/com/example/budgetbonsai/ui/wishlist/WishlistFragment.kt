@@ -1,5 +1,6 @@
 package com.example.budgetbonsai.ui.wishlist
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,7 +43,9 @@ class WishlistFragment : Fragment() {
         val view = binding.root
 
         userPreference = UserPreference.getInstance(requireContext().dataStore)
-        adapter = WishlistAdapter(requireContext(), emptyList())
+        adapter = WishlistAdapter(requireContext(), emptyList()) { item ->
+            showDeleteConfirmationDialog(item)
+        }
         binding.rvWishlist.layoutManager = LinearLayoutManager(requireContext())
         binding.rvWishlist.adapter = adapter
 
@@ -66,6 +69,22 @@ class WishlistFragment : Fragment() {
             }
         }
 
+        viewModel.deleteWishlistResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    // Tampilkan indikator loading jika diperlukan
+                }
+                is Result.Success -> {
+                    Toast.makeText(requireContext(), result.data.message, Toast.LENGTH_SHORT).show()
+                    // Refresh atau update list wishlist
+                    viewModel.fetchWishlist()
+                }
+                is Result.Error -> {
+                    Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         return view
     }
 
@@ -79,6 +98,20 @@ class WishlistFragment : Fragment() {
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_wishlistFragment_to_addFragment)
         }
+    }
+
+    private fun showDeleteConfirmationDialog(item: WishlistItem) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Delete Wishlist")
+            .setMessage("Are you sure you want to delete this wishlist?")
+            .setPositiveButton("Yes") { dialog, _ ->
+                item.id?.let { viewModel.deleteWishlist(it) }
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     override fun onResume() {

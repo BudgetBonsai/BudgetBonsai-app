@@ -66,25 +66,25 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
-            <ImageButton
-                android:id="@+id/btn_edit_wishlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_edit_24"
-                android:layout_alignParentEnd="true"
-                android:layout_alignTop="@id/btn_deposit"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Edit Wishlist"
-                android:layout_gravity="end"/>
+<!--            <ImageButton-->
+<!--                android:id="@+id/btn_edit_wishlist"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/baseline_edit_24"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_alignTop="@id/btn_deposit"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginRight="8dp"-->
+<!--                android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:contentDescription="Edit Wishlist"-->
+<!--                android:layout_gravity="end"/>-->
             <ImageButton
                 android:id="@+id/btn_del_wishlist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_delete_24"
-                android:layout_toLeftOf="@id/btn_edit_wishlist"
                 android:layout_alignTop="@id/btn_deposit"
+                android:layout_alignParentEnd="true"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"

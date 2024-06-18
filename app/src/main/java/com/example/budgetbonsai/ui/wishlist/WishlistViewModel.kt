@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.budgetbonsai.data.remote.response.AddWishlistResponse
+import com.example.budgetbonsai.data.remote.response.DeleteResponse
 import com.example.budgetbonsai.data.remote.response.WishlistItem
 import com.example.budgetbonsai.repository.TransactionRepository
 import com.example.budgetbonsai.utils.Result
@@ -26,6 +27,8 @@ class WishlistViewModel(private val wishlistRepository: WishlistRepository, priv
     val wishlistLiveData: LiveData<Result<List<WishlistItem>>> = _wishlistLiveData
     private val _addWishlistResult = MutableLiveData<Result<AddWishlistResponse>>()
     val addWishlistResult: LiveData<Result<AddWishlistResponse>> = _addWishlistResult
+    private val _deleteWishlistResult = MutableLiveData<Result<DeleteResponse>>()
+    val deleteWishlistResult: LiveData<Result<DeleteResponse>> = _deleteWishlistResult
 
     var imageUri: Uri? = null
 
@@ -74,6 +77,18 @@ class WishlistViewModel(private val wishlistRepository: WishlistRepository, priv
         val filePath = cursor?.getString(columnIndex ?: 0)
         cursor?.close()
         return File(filePath)
+    }
+
+    fun deleteWishlist(id: String) {
+        _deleteWishlistResult.value = Result.Loading
+        viewModelScope.launch {
+            try {
+                val result = wishlistRepository.deleteWishlist(id)
+                _deleteWishlistResult.postValue(result)
+            } catch (e: Exception) {
+                _deleteWishlistResult.postValue(Result.Error("Failed to delete wishlist"))
+            }
+        }
     }
 
     class WishlistViewModelFactory(private val repository: WishlistRepository, private val context: Context) : ViewModelProvider.Factory {

@@ -4,6 +4,7 @@ import com.example.budgetbonsai.data.model.Transaction
 import com.example.budgetbonsai.data.model.Wishlist
 import com.example.budgetbonsai.data.remote.response.AddTransactionResponse
 import com.example.budgetbonsai.data.remote.response.AddWishlistResponse
+import com.example.budgetbonsai.data.remote.response.DeleteResponse
 import com.example.budgetbonsai.data.remote.response.GetTransactionResponse
 import com.example.budgetbonsai.data.remote.response.LoginResponse
 import com.example.budgetbonsai.data.remote.response.RegisterResponse
@@ -12,13 +13,16 @@ import com.example.budgetbonsai.data.remote.response.WishlistResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface ApiService {
     @FormUrlEncoded
@@ -65,4 +69,6 @@ interface ApiService {
         @Part file: MultipartBody.Part
     ): AddWishlistResponse
 
+    @DELETE("wishlist/{id}")
+    suspend fun deleteWishlist(@Path("id") id: String): Response<DeleteResponse>
 }
