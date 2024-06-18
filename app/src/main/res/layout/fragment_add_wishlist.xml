@@ -125,15 +125,21 @@
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
             <Button
-                android:id="@+id/loginButton"
+                android:id="@+id/btn_addwishlist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add to Wishlist"
                 android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="64dp"
                 android:backgroundTint="#BDD898"/>
-
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
         </LinearLayout>
         </ScrollView>
     </com.google.android.material.card.MaterialCardView>
+
 </LinearLayout>

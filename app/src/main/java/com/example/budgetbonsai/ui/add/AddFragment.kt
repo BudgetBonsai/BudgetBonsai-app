@@ -29,7 +29,7 @@ class AddFragment : Fragment() {
             onAddExpensesClicked()
         }
 
-        binding.btnAddwishlist.setOnClickListener {
+        binding.btnAddtowishlist.setOnClickListener {
             findNavController().navigate(R.id.action_addFragment_to_addExpensesFragment)
         }
     }

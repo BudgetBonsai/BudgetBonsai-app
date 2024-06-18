@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.budgetbonsai.R
-import com.example.budgetbonsai.data.model.Wishlist
 import com.example.budgetbonsai.data.remote.response.WishlistItem
 import com.example.budgetbonsai.databinding.ItemWishlistBinding
 

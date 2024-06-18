@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.budgetbonsai.R
-import com.example.budgetbonsai.data.model.Wishlist
 import com.example.budgetbonsai.data.remote.response.WishlistItem
 import com.example.budgetbonsai.databinding.ItemWishlistBinding
 
-class WishlistAdapter(private val context: Context, private val wishlist: List<WishlistItem>) : RecyclerView.Adapter<WishlistViewHolder>() {
+class WishlistAdapter(private val context: Context, private var wishlist: List<WishlistItem>) : RecyclerView.Adapter<WishlistViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistViewHolder {
         val binding = ItemWishlistBinding.inflate(
@@ -27,6 +25,11 @@ class WishlistAdapter(private val context: Context, private val wishlist: List<W
             showWithdrawDialog()
         }
         holder.bind(wishlist[position])
+    }
+
+    fun setItems(items: List<WishlistItem>) {
+        wishlist = items
+        notifyDataSetChanged()
     }
 
     private fun showDepositDialog() {
