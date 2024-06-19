@@ -42,7 +42,7 @@ class ReceiptsViewModel {
             ".jpg", /* suffix */
             storageDir      /* directory */
         )
-        imageURI = FileProvider.getUriForFile(context, "co.uk.random.provider", filephoto)
+        imageURI = FileProvider.getUriForFile(context, "com.example.budgetbonsai.provider", filephoto)
         val pictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI)
         return pictureIntent
