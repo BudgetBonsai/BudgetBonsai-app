@@ -23,6 +23,7 @@ import com.example.budgetbonsai.data.remote.ApiConfig
 import com.example.budgetbonsai.data.remote.response.WishlistItem
 import com.example.budgetbonsai.databinding.FragmentWishlistBinding
 import com.example.budgetbonsai.repository.WishlistRepository
+import com.example.budgetbonsai.ui.NotificationWorker
 import com.example.budgetbonsai.utils.Result
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -35,6 +36,7 @@ class WishlistFragment : Fragment() {
     private lateinit var userPreference: UserPreference
     private lateinit var adapter: WishlistAdapter
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,6 +67,12 @@ class WishlistFragment : Fragment() {
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     adapter.setItems(result.data)
+
+                    result.data.forEach { item ->
+                        item.type?.let {
+                            NotificationWorker.scheduleNotification(requireContext(), it)
+                        }
+                    }
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -144,6 +152,7 @@ class WishlistFragment : Fragment() {
         findNavController().navigate(R.id.action_wishlistFragment_to_editWishlistFragment, bundle)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun showDepositDialog(item: WishlistItem) {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_deposit, null)
         val editTextDepositAmount = dialogView.findViewById<EditText>(R.id.edit_text_deposit_amount)

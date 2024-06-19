@@ -13,13 +13,11 @@ import com.example.budgetbonsai.databinding.ItemWishlistBinding
 class WishlistViewHolder(private val binding: ItemWishlistBinding) : RecyclerView.ViewHolder(binding.root) {
 
     val btnDeposit: Button = binding.btnDeposit
-    val btnWithdraw: Button = binding.btnWithdraw
     val btnDelWishlist: ImageButton = binding.btnDelWishlist
     val btnEditWishlist: ImageButton = binding.btnEditWishlist
 
     fun setOnClickListener(listener: (Int) -> Unit) {
         binding.btnDeposit.setOnClickListener { listener(R.id.btn_deposit) }
-        binding.btnWithdraw.setOnClickListener { listener(R.id.btn_withdraw) }
     }
 
     fun bind(item: WishlistItem) {

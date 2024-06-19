@@ -18,6 +18,7 @@ import com.example.budgetbonsai.data.remote.response.WishlistItem
 import com.example.budgetbonsai.repository.TransactionRepository
 import com.example.budgetbonsai.utils.Result
 import com.example.budgetbonsai.repository.WishlistRepository
+import com.example.budgetbonsai.ui.NotificationScheduler
 import com.example.budgetbonsai.ui.transaction.TransactionViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -43,6 +44,7 @@ class WishlistViewModel(private val wishlistRepository: WishlistRepository, priv
     private val _selectedItemId = MutableLiveData<Int>()
     val selectedItemId: LiveData<Int> = _selectedItemId
 
+    private val notificationScheduler = NotificationScheduler(context)
     var imageUri: Uri? = null
 
     init {
@@ -154,8 +156,8 @@ class WishlistViewModel(private val wishlistRepository: WishlistRepository, priv
         return current.format(formatter)
     }
 
-    fun setSelectedItemId(itemId: Int) {
-        _selectedItemId.value = itemId
+    private fun scheduleNotificationForWishlist(item: WishlistItem) {
+        notificationScheduler.scheduleNotification(item.type.toString())
     }
 
     class WishlistViewModelFactory(private val repository: WishlistRepository, private val context: Context) : ViewModelProvider.Factory {

@@ -9,5 +9,5 @@
         android:id="@+id/splashImage"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:src="@drawable/app_logo" />
+        android:src="@drawable/logo2" />
 </RelativeLayout>

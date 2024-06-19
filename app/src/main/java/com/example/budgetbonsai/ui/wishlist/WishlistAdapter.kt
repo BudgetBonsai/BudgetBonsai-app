@@ -26,9 +26,6 @@ class WishlistAdapter(private val context: Context, private var wishlist: List<W
         holder.btnDeposit.setOnClickListener {
             onDepositClick(wishlist[position])
         }
-        holder.btnWithdraw.setOnClickListener {
-            showWithdrawDialog()
-        }
         holder.btnDelWishlist.setOnClickListener {
             onDeleteClick(wishlist[position])
         }

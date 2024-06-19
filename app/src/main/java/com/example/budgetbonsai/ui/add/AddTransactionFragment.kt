@@ -72,14 +72,6 @@ class AddTransactionFragment : Fragment() {
             }
         }
 
-        val autoCompleteTextView = binding.autoCompleteTextView // Replace with your view binding
-
-        autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
-            val selectedCategory = parent.getItemAtPosition(position) as String
-//            Toast.makeText(requireContext(), "Selected Category: $selectedCategory", Toast.LENGTH_SHORT).show()
-        }
-
-
         binding.btnAdd.setOnClickListener {
             val date = binding.edtInputdate.text.toString()
             val name = binding.edtInputname.text.toString()

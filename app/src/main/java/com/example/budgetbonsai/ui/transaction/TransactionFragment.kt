@@ -122,7 +122,7 @@ class TransactionFragment : Fragment() {
         }
 
         val pieEntries = categoryTotals.map { PieEntry(it.value, it.key) }
-        val pieDataset = PieDataSet(pieEntries, "Expenses")
+        val pieDataset = PieDataSet(pieEntries, "")
         pieDataset.setColors(ColorTemplate.MATERIAL_COLORS, 255)
         pieDataset.valueTextSize = 15f
         pieDataset.valueTextColor = Color.BLACK
