@@ -1,13 +1,11 @@
 package com.example.budgetbonsai.data.remote.response
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-data class WishlistResponse(
+data class EditWishlistResponse(
 
 	@field:SerializedName("data")
-	val data: List<WishlistItem?>? = null,
+	val data: EditData? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,
@@ -16,8 +14,7 @@ data class WishlistResponse(
 	val message: String? = null
 )
 
-@Parcelize
-data class WishlistItem(
+data class EditData(
 
 	@field:SerializedName("image")
 	val image: String? = null,
@@ -25,11 +22,11 @@ data class WishlistItem(
 	@field:SerializedName("amount")
 	val amount: Int? = null,
 
-	@field:SerializedName("saving_plan")
-	val savingPlan: String? = null,
-
 	@field:SerializedName("name")
 	val name: String? = null,
+
+	@field:SerializedName("saving_plan")
+	val savingPlan: String? = null,
 
 	@field:SerializedName("id")
 	val id: String? = null,
@@ -37,6 +34,6 @@ data class WishlistItem(
 	@field:SerializedName("type")
 	val type: String? = null,
 
-	@field:SerializedName("userId")
-	val userId: String? = null
-) : Parcelable
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
+)

@@ -15,6 +15,7 @@ class WishlistViewHolder(private val binding: ItemWishlistBinding) : RecyclerVie
     val btnDeposit: Button = binding.btnDeposit
     val btnWithdraw: Button = binding.btnWithdraw
     val btnDelWishlist: ImageButton = binding.btnDelWishlist
+    val btnEditWishlist: ImageButton = binding.btnEditWishlist
 
     fun setOnClickListener(listener: (Int) -> Unit) {
         binding.btnDeposit.setOnClickListener { listener(R.id.btn_deposit) }

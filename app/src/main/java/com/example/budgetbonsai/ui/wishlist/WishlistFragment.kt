@@ -1,11 +1,15 @@
 package com.example.budgetbonsai.ui.wishlist
 
 import android.app.AlertDialog
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -18,11 +22,7 @@ import com.example.budgetbonsai.data.local.dataStore
 import com.example.budgetbonsai.data.remote.ApiConfig
 import com.example.budgetbonsai.data.remote.response.WishlistItem
 import com.example.budgetbonsai.databinding.FragmentWishlistBinding
-import com.example.budgetbonsai.repository.TransactionRepository
 import com.example.budgetbonsai.repository.WishlistRepository
-import com.example.budgetbonsai.ui.transaction.TransactionAdapter
-import com.example.budgetbonsai.ui.transaction.TransactionViewModel
-import com.example.budgetbonsai.ui.transaction.TransactionViewModelFactory
 import com.example.budgetbonsai.utils.Result
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -43,9 +43,13 @@ class WishlistFragment : Fragment() {
         val view = binding.root
 
         userPreference = UserPreference.getInstance(requireContext().dataStore)
-        adapter = WishlistAdapter(requireContext(), emptyList()) { item ->
+        adapter = WishlistAdapter(requireContext(), emptyList(), { item ->
             showDeleteConfirmationDialog(item)
-        }
+        }, { item ->
+            showEditWishlistFragment(item)
+        }, { item ->
+            showDepositDialog(item)
+        })
         binding.rvWishlist.layoutManager = LinearLayoutManager(requireContext())
         binding.rvWishlist.adapter = adapter
 
@@ -85,6 +89,24 @@ class WishlistFragment : Fragment() {
             }
         }
 
+        viewModel.editWishlistResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    // Show loading indicator
+                }
+                is Result.Success -> {
+                    // Wishlist edited successfully
+                    Toast.makeText(context, "Wishlist updated successfully", Toast.LENGTH_SHORT).show()
+                    viewModel.fetchWishlist() // Refresh the wishlist
+                }
+                is Result.Error -> {
+                    // Handle error
+                    Log.e("WishlistFragment", "Error editing wishlist: ${result.error}")
+                    Toast.makeText(context, "Failed to update wishlist", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         return view
     }
 
@@ -94,7 +116,7 @@ class WishlistFragment : Fragment() {
         recyclerView = binding.rvWishlist
         recyclerView?.layoutManager = LinearLayoutManager(context)
 
-        val fab = view.findViewById<FloatingActionButton>(R.id.fab_add)
+        val fab = binding.fabAdd
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_wishlistFragment_to_addFragment)
         }
@@ -112,6 +134,40 @@ class WishlistFragment : Fragment() {
                 dialog.dismiss()
             }
             .show()
+    }
+
+    private fun showEditWishlistFragment(item: WishlistItem) {
+        Log.d("WishlistFragment", "Sending item to edit: ${item.id}")
+        val bundle = Bundle().apply {
+            putParcelable("wishlist_item", item)
+        }
+        findNavController().navigate(R.id.action_wishlistFragment_to_editWishlistFragment, bundle)
+    }
+
+    private fun showDepositDialog(item: WishlistItem) {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_deposit, null)
+        val editTextDepositAmount = dialogView.findViewById<EditText>(R.id.edit_text_deposit_amount)
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("Deposit Amount")
+            .setView(dialogView)
+            .setPositiveButton("Deposit") { _, _ ->
+                val amount = editTextDepositAmount.text.toString().toIntOrNull()
+                if (amount != null) {
+                    depositAmount(item, amount)
+                } else {
+                    Toast.makeText(requireContext(), "Invalid amount", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+
+        dialog.show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun depositAmount(item: WishlistItem, amount: Int) {
+        viewModel.depositWishlistAmount(item.id!!, amount)
     }
 
     override fun onResume() {

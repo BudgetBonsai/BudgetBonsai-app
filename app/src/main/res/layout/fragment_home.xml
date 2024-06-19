@@ -72,6 +72,7 @@
                         android:backgroundTint="#D9D9D9">
 
                         <TextView
+                            android:id="@+id/tv_prediction"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"

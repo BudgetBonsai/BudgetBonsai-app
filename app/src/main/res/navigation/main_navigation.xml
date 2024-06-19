@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_wishlistFragment_to_addFragment"
             app:destination="@id/addWishlistFragment" />
+        <action
+            android:id="@+id/action_wishlistFragment_to_editWishlistFragment"
+            app:destination="@id/editWishlistFragment" />
     </fragment>
     <fragment
         android:id="@+id/addWishlistFragment"
@@ -52,4 +55,13 @@
         android:name="com.example.budgetbonsai.ui.add.AddtoWishlistFragment"
         android:label="fragment_add_to_wishlist"
         tools:layout="@layout/fragment_add_transaction" />
+    <fragment
+        android:id="@+id/editWishlistFragment"
+        android:name="com.example.budgetbonsai.ui.wishlist.EditWishlistFragment"
+        android:label="fragment_edit_wishlist"
+        tools:layout="@layout/fragment_edit_wishlist">
+        <argument
+            android:name="wishlistItem"
+            app:argType="com.example.budgetbonsai.data.remote.response.WishlistItem" />
+    </fragment>
 </navigation>
