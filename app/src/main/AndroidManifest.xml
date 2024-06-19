@@ -16,6 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="text" />
         <activity
             android:name=".ui.landing.LandingActivity"
             android:exported="false" />

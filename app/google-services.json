@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "809522311403",
+    "project_id": "budgetbonsai-app",
+    "storage_bucket": "budgetbonsai-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809522311403:android:6b08b0c500f202e6d3ceae",
+        "android_client_info": {
+          "package_name": "com.example.budgetbonsai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAuxyfIF1dTHLoTClc6IqsSJfNalWjPIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

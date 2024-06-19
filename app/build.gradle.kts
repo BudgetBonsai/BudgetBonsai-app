@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
 //    id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -90,4 +91,15 @@ dependencies {
     implementation ("androidx.room:room-ktx:2.6.1")
 
     implementation ("androidx.work:work-runtime-ktx:2.9.0")
+
+    // Firebase
+    implementation("com.google.firebase:firebase-core:16.0.4")
+    implementation("com.google.firebase:firebase-ml-vision:17.0.1")
+
+    // Import the Firebase BoM
+    //implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+
+    // Add the dependencies for Firebase products you want to use
+    //implementation("com.google.firebase:firebase-analytics")
+    //implementation("com.google.firebase:firebase-ml-vision")
 }
