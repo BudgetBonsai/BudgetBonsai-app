@@ -75,7 +75,7 @@ class AddTransactionFragment : Fragment() {
         binding.btnAdd.setOnClickListener {
             val date = binding.edtInputdate.text.toString()
             val name = binding.edtInputname.text.toString()
-            val amount = binding.edtInputamount.text.toString()
+            val amount = binding.edtInputamount.text.toString().toInt()
             val category = binding.autoCompleteTextView.text.toString()
             val type = when (binding.toggleButton.checkedButtonId) {
                 R.id.btn_income -> "Income"

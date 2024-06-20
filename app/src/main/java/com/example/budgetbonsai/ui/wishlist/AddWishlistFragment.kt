@@ -14,6 +14,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.budgetbonsai.R
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.local.dataStore
 import com.example.budgetbonsai.data.remote.ApiConfig
@@ -89,6 +90,27 @@ class AddWishlistFragment : Fragment() {
         binding.savingImage.setOnClickListener {
             pickMediaLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
+
+        binding.toggleButton.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.btn_daily -> {
+                        // Handle daily toggle button selection
+                        viewModel.selectedWishlistType = "Daily"
+                    }
+
+                    R.id.btn_weekly -> {
+                        // Handle weekly toggle button selection
+                        viewModel.selectedWishlistType = "Weekly"
+                    }
+
+                    R.id.btn_monthly -> {
+                        // Handle monthly toggle button selection
+                        viewModel.selectedWishlistType = "Monthly"
+                    }
+                }
+            }
+        }
     }
 
 //    private fun addWishlist() {
@@ -126,7 +148,7 @@ class AddWishlistFragment : Fragment() {
             val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), imageFile)
             val body = MultipartBody.Part.createFormData("file", imageFile.name, requestFile)
 
-            viewModel.addWishlist(name, amount, savingPlan, "Weekly", viewModel.imageUri.toString())
+            viewModel.addWishlist(name, amount, savingPlan, viewModel.selectedWishlistType, viewModel.imageUri.toString())
         } else {
             Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
         }

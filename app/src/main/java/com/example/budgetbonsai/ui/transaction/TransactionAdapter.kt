@@ -37,12 +37,11 @@ class TransactionAdapter(private var transactions: List<DataItem>) : RecyclerVie
 
         fun bind(transaction: DataItem) {
             val dateFormatted = transaction.date?.seconds?.let {
-                java.text.SimpleDateFormat("dd MMM, HH.mm", java.util.Locale.getDefault()).format(java.util.Date(it.toLong() * 1000))
+                java.text.SimpleDateFormat("dd MMM", java.util.Locale.getDefault()).format(java.util.Date(it.toLong() * 1000))
             } ?: "No Date"
 
             historyDate.text = dateFormatted
             historyName.text = transaction.name
-//            historyAmount.text = "$${transaction.amount}"
             historyAmount.text = "${getTransactionSign(transaction.type)} ${transaction.amount}"
         }
     }
