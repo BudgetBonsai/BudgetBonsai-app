@@ -48,8 +48,8 @@ class TransactionAdapter(private var transactions: List<DataItem>) : RecyclerVie
 
     private fun getTransactionSign(transactionType: String?): String {
         return when (transactionType) {
-            "Income" -> "+"
-            "Outcome" -> "-"
+            "income" -> "+"
+            "expense" -> "-"
             else -> ""
         }
     }

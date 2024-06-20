@@ -1,5 +1,6 @@
 package com.example.budgetbonsai.ui.wishlist
 
+import android.app.AlarmManager
 import android.app.AlertDialog
 import android.os.Build
 import android.os.Bundle
@@ -18,12 +19,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbonsai.R
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.local.dataStore
-
 import com.example.budgetbonsai.data.remote.ApiConfig
 import com.example.budgetbonsai.data.remote.response.WishlistItem
 import com.example.budgetbonsai.databinding.FragmentWishlistBinding
 import com.example.budgetbonsai.repository.WishlistRepository
-import com.example.budgetbonsai.ui.NotificationWorker
+import com.example.budgetbonsai.ui.NotificationScheduler
 import com.example.budgetbonsai.utils.Result
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -84,14 +84,15 @@ class WishlistFragment : Fragment() {
         viewModel.deleteWishlistResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
-                    // Tampilkan indikator loading jika diperlukan
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), result.data.message, Toast.LENGTH_SHORT).show()
-                    // Refresh atau update list wishlist
                     viewModel.fetchWishlist()
                 }
                 is Result.Error -> {
+                    binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -177,6 +178,32 @@ class WishlistFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun depositAmount(item: WishlistItem, amount: Int) {
         viewModel.depositWishlistAmount(item.id!!, amount)
+        viewModel.depositResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    // Handle loading state if needed
+                }
+                is Result.Success -> {
+                    // Handle success state if needed
+                    Toast.makeText(requireContext(), "Deposit successful", Toast.LENGTH_SHORT).show()
+                }
+                is Result.Error -> {
+                    // Handle error state
+                    val errorMessage = "Failed to deposit amount: ${result.error}"
+                    Log.e("WishlistFragment", errorMessage)
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun calculateIntervalInMillis(type: String): Long {
+        return when (type) {
+            "Daily" -> AlarmManager.INTERVAL_DAY
+            "Weekly" -> AlarmManager.INTERVAL_DAY * 7
+            "Monthly" -> AlarmManager.INTERVAL_DAY * 30
+            else -> AlarmManager.INTERVAL_DAY // Default, misalnya jika tidak ada nilai yang cocok
+        }
     }
 
     override fun onResume() {

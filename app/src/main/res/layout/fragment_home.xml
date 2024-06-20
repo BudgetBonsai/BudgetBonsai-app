@@ -243,39 +243,39 @@
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_goals"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:backgroundTint="#BBC0BF">
+<!--            <com.google.android.material.card.MaterialCardView-->
+<!--                android:id="@+id/card_goals"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="8dp"-->
+<!--                android:backgroundTint="#BBC0BF">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        style="@style/TextAppearance.MyApp.TitleLarge"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:text="Goals" />
+<!--                    <TextView-->
+<!--                        style="@style/TextAppearance.MyApp.TitleLarge"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_margin="16dp"-->
+<!--                        android:text="Goals" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
-                        android:text="Saving progress" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:paddingHorizontal="16dp"-->
+<!--                        android:text="Saving progress" />-->
 
-                    <com.google.android.material.progressindicator.LinearProgressIndicator
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:indeterminate="false"
-                        android:padding="16dp"
-                        android:progress="40" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+<!--                    <com.google.android.material.progressindicator.LinearProgressIndicator-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:indeterminate="false"-->
+<!--                        android:padding="16dp"-->
+<!--                        android:progress="40" />-->
+<!--                </LinearLayout>-->
+<!--            </com.google.android.material.card.MaterialCardView>-->
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"

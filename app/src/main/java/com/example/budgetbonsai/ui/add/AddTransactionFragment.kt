@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.budgetbonsai.utils.Category
 import com.example.budgetbonsai.R
 import com.example.budgetbonsai.data.local.UserPreference
@@ -84,12 +85,17 @@ class AddTransactionFragment : Fragment() {
             val amount = binding.edtInputamount.text.toString().toInt()
             val category = binding.autoCompleteTextView.text.toString()
             val type = when (binding.toggleButton.checkedButtonId) {
-                R.id.btn_income -> "Income"
-                R.id.btn_expense -> "Outcome"
+                R.id.btn_income -> "income"
+                R.id.btn_expense -> "expense"
                 else -> ""
             }
             val transaction = Transaction(date, name, amount, category, type)
             sendTransactionToApi(transaction)
+        }
+
+        val btnBack = binding.backImageButton
+        btnBack.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 
@@ -123,6 +129,7 @@ class AddTransactionFragment : Fragment() {
                             if (transactionResponse != null && !transactionResponse.error!!) {
                                 Toast.makeText(requireContext(), transactionResponse.message, Toast.LENGTH_SHORT).show()
                                 Log.i("API Response", "Transaction added successfully: ${transactionResponse.data}")
+                                parentFragmentManager.popBackStack()
                             } else {
                                 Toast.makeText(requireContext(), "Failed to add transaction", Toast.LENGTH_SHORT).show()
                                 Log.e("API Response", "Error: ${response.errorBody()?.string()}")

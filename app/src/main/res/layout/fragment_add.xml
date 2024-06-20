@@ -9,14 +9,6 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_addtowishlist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add to Wishlist"
-        android:layout_marginBottom="8dp"
-        android:layout_marginHorizontal="32dp"
-        android:backgroundTint="#BDD898"/>
-    <Button
         android:id="@+id/btn_addexpenses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

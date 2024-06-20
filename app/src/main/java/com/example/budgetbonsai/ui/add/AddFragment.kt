@@ -49,10 +49,6 @@ class AddFragment : Fragment() {
             onAddExpensesClicked()
         }
 
-        binding.btnAddtowishlist.setOnClickListener {
-            findNavController().navigate(R.id.action_addFragment_to_addExpensesFragment)
-        }
-
         binding.btnAddwithcamera.setOnClickListener {
             if (ContextCompat.checkSelfPermission(
                     requireContext(),

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbonsai.R
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.local.dataStore
@@ -39,6 +40,8 @@ class TransactionFragment : Fragment() {
 
         userPreference = UserPreference.getInstance(requireContext().dataStore)
         adapter = TransactionAdapter(emptyList())
+        binding.rvTransaction.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvTransaction.adapter = adapter
 
         val apiService = ApiConfig.getApiService(userPreference)
         val repository = TransactionRepository(apiService, userPreference)
@@ -74,7 +77,7 @@ class TransactionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupTabLayoutAndViewPager()
+//        setupTabLayoutAndViewPager()
 
         pieChart = view.findViewById(R.id.piechart)
 
@@ -95,22 +98,22 @@ class TransactionFragment : Fragment() {
         }
     }
 
-    private fun setupTabLayoutAndViewPager() {
-        val tabLayout = binding.tabLayout
-        val viewPager = binding.viewPager
-
-        val adapter = ViewPagerAdapter(this)
-        viewPager.adapter = adapter
-
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = when (position) {
-                0 -> "Daily"
-                1 -> "Weekly"
-                2 -> "Monthly"
-                else -> null
-            }
-        }.attach()
-    }
+//    private fun setupTabLayoutAndViewPager() {
+//        val tabLayout = binding.tabLayout
+//        val viewPager = binding.viewPager
+//
+//        val adapter = ViewPagerAdapter(this)
+//        viewPager.adapter = adapter
+//
+//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+//            tab.text = when (position) {
+//                0 -> "Daily"
+//                1 -> "Weekly"
+//                2 -> "Monthly"
+//                else -> null
+//            }
+//        }.attach()
+//    }
 
     private fun updatePieChart(transactions: List<DataItem>) {
         val categoryTotals = mutableMapOf<String, Float>()

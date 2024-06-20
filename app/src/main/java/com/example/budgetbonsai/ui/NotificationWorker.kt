@@ -1,11 +1,9 @@
-package com.example.budgetbonsai.ui
-
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -18,7 +16,11 @@ class NotificationWorker(
 ) : Worker(context, workerParams) {
 
     override fun doWork(): Result {
-        showNotification("Time to Save!", "Don't forget to save for your wishlist!")
+        val title = "Time to Save!"
+        val message = "Don't forget to save for your wishlist!"
+
+        showNotification(title, message)
+
         return Result.success()
     }
 
@@ -48,8 +50,8 @@ class NotificationWorker(
                 "Monthly" -> 30L
                 else -> 1L
             }
-
-            val workRequest = PeriodicWorkRequestBuilder<NotificationWorker>(interval, TimeUnit.DAYS)
+            val workRequest = OneTimeWorkRequestBuilder<NotificationWorker>()
+                .setInitialDelay(interval, TimeUnit.DAYS)
                 .build()
 
             WorkManager.getInstance(context).enqueue(workRequest)

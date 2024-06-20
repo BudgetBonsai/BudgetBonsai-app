@@ -5,17 +5,27 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.budgetbonsai.R
+import com.example.budgetbonsai.ViewModelFactory
+import com.example.budgetbonsai.data.local.UserPreference
+import com.example.budgetbonsai.data.local.dataStore
 import com.example.budgetbonsai.databinding.ActivityLandingBinding
+import com.example.budgetbonsai.ui.MainActivity
 import com.example.budgetbonsai.ui.login.LoginActivity
+import com.example.budgetbonsai.ui.login.LoginViewModel
 import com.example.budgetbonsai.ui.register.RegisterActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LandingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLandingBinding
+    private lateinit var userPreference: UserPreference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,6 +37,12 @@ class LandingActivity : AppCompatActivity() {
             insets
         }
 
+        val viewModelFactory = ViewModelFactory.getInstance(this)
+        val viewModel: LoginViewModel by viewModels { viewModelFactory}
+
+        userPreference = UserPreference.getInstance(dataStore)
+        checkSessionAndRedirect()
+
         binding.btnSignup.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
@@ -36,6 +52,20 @@ class LandingActivity : AppCompatActivity() {
     }
 
     private var doubleBackToExitPressedOnce = false
+
+    private fun goToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish() // Optional: Hapus LandingActivity dari stack jika tidak ingin kembali ke sini
+    }
+
+    private fun checkSessionAndRedirect() {
+        CoroutineScope(Dispatchers.Main).launch {
+            if (userPreference.isSessionActive()) {
+                goToMainActivity()
+            }
+        }
+    }
 
     override fun onBackPressed() {
         Toast.makeText(this, "Press back again to close the app", Toast.LENGTH_SHORT).show()

@@ -85,7 +85,7 @@ class WishlistRepository(private val apiService: ApiService) {
     }
 
     suspend fun depositWishlistAmount(id: String, date: String, amount: Int): AddAmountResponse {
-        val depositRequest = DepositRequest(date, amount)
+        val depositRequest = DepositRequest(date, amount, "Income")
         return apiService.depositWishlistAmount(id, depositRequest)
     }
 

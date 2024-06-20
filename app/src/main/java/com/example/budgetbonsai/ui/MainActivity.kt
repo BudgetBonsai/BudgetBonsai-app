@@ -4,7 +4,9 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -110,5 +112,20 @@ class MainActivity : AppCompatActivity() {
         } else {
             // Permission is denied.
         }
+    }
+
+    private var doubleBackToExitPressedOnce = false
+    override fun onBackPressed() {
+        Toast.makeText(this, "Press back again to close the app", Toast.LENGTH_SHORT).show()
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Handler().postDelayed({
+            doubleBackToExitPressedOnce = false
+        }, 2000)
     }
 }

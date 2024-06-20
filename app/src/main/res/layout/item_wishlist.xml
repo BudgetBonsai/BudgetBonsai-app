@@ -34,12 +34,12 @@
             android:paddingHorizontal="8dp"
             android:text="You currently saved $0.00 out of $500.0"/>
 
-        <TextView
-            android:id="@+id/tv_deadline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            android:text="You have until 12/31/2021 to finish this wishlist"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_deadline"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingHorizontal="8dp"-->
+<!--            android:text="You have until 12/31/2021 to finish this wishlist"/>-->
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -42,28 +42,29 @@
 <!--                android:layout_below="@id/tv_settings"-->
 <!--                android:text="Notifications"/>-->
 
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/switch_notifications"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingEnd="8dp"
-                android:layout_below="@id/tv_settings"
-                android:layout_alignStart="@id/tv_settings"
-                android:checked="true"
-                android:text="Notifications"/>
+<!--            <com.google.android.material.materialswitch.MaterialSwitch-->
+<!--                android:id="@+id/switch_notifications"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingEnd="8dp"-->
+<!--                android:layout_below="@id/tv_settings"-->
+<!--                android:layout_alignStart="@id/tv_settings"-->
+<!--                android:checked="true"-->
+<!--                android:text="Notifications"/>-->
 
-            <Button
-                android:id="@+id/btn_language"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="match_parent"
-                android:gravity="start"
-                android:paddingStart="0dp"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@id/tv_settings"
-                android:layout_below="@id/switch_notifications"
-                android:layout_marginTop="0dp"
-                app:rippleColor="#F2F1EF"
-                android:text="Language" />
+<!--            <Button-->
+<!--                android:id="@+id/btn_language"-->
+<!--                style="@style/Widget.Material3.Button.TextButton"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:gravity="start"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignStart="@id/tv_settings"-->
+<!--                android:layout_below="@id/tv_settings"-->
+<!--                android:layout_marginTop="0dp"-->
+<!--                android:paddingTop="16dp"-->
+<!--                app:rippleColor="#F2F1EF"-->
+<!--                android:text="Language" />-->
             <Button
                 android:id="@+id/btn_signout"
                 style="@style/Widget.Material3.Button.TextButton"
@@ -72,12 +73,11 @@
                 android:paddingStart="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@id/tv_settings"
-                android:layout_below="@id/btn_language"
+                android:layout_below="@id/tv_settings"
                 android:layout_marginTop="0dp"
                 app:rippleColor="#F2F1EF"
                 android:textColor="@color/design_default_color_error"
                 android:text="Signout" />
-
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>

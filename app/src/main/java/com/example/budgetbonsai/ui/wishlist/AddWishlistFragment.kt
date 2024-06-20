@@ -140,15 +140,15 @@ class AddWishlistFragment : Fragment() {
 
     private fun addWishlist() {
         val name = binding.wishlistname.editText?.text.toString()
-        val amount = binding.wishlistamount.editText?.text.toString().toIntOrNull()
+//        val amount = binding.wishlistamount.editText?.text.toString().toIntOrNull()
         val savingPlan = binding.wishlistsaving.editText?.text.toString()
 
-        if (name.isNotEmpty() && amount != null && savingPlan.isNotEmpty() && viewModel.imageUri != null) {
+        if (name.isNotEmpty()  && savingPlan.isNotEmpty() && viewModel.imageUri != null) {
             val imageFile = uriToFile(viewModel.imageUri!!, requireContext())
             val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), imageFile)
             val body = MultipartBody.Part.createFormData("file", imageFile.name, requestFile)
 
-            viewModel.addWishlist(name, amount, savingPlan, viewModel.selectedWishlistType, viewModel.imageUri.toString())
+            viewModel.addWishlist(name, 0, savingPlan, viewModel.selectedWishlistType, viewModel.imageUri.toString())
         } else {
             Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
         }

@@ -1,5 +1,6 @@
 package com.example.budgetbonsai.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.budgetbonsai.data.local.UserPreference
@@ -30,15 +31,16 @@ class TransactionRepository(private val apiService: ApiService, private val user
         var totalIncome = 0.0
         var totalExpense = 0.0
 
-        transactions.forEach { transaction ->
-            val amount = transaction.amount ?: 0.0
-            if (transaction.type == "Income") {
-                totalIncome += amount.toDouble()
-            } else if (transaction.type == "Outcome") {
-                totalExpense += amount.toDouble()
+        for (transaction in transactions) {
+            val amount = transaction.amount?.toDouble() ?: 0.0
+            if (transaction.type?.lowercase() == "income") {
+                totalIncome += amount
+            } else {
+                totalExpense += amount
             }
         }
 
+        Log.d("TransactionRepository", "Total Income: $totalIncome, Total Expense: $totalExpense")
         return Pair(totalIncome, totalExpense)
     }
 
