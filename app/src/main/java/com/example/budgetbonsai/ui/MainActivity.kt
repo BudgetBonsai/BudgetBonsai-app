@@ -17,6 +17,8 @@ import com.example.budgetbonsai.databinding.ActivityMainBinding
 import com.example.budgetbonsai.ui.settings.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseOptions
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +30,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Firebase keys
+        val API_KEY_FIREBASE = "AIzaSyCAuxyfIF1dTHLoTClc6IqsSJfNalWjPIM"
+        val APP_ID = "1:809522311403:android:6b08b0c500f202e6d3ceae"
+        val APP_NAME = "budgetbonsai"
+
+        //initialize firebase
+        val firebaseOptions = FirebaseOptions.Builder()
+            .setApiKey(API_KEY_FIREBASE)
+            .setApplicationId(APP_ID).build()
+        FirebaseApp.initializeApp(this, firebaseOptions, APP_NAME)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController

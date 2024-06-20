@@ -49,6 +49,12 @@ class AddTransactionFragment : Fragment() {
         val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         binding.edtInputdate.setText(currentDate)
 
+        val total = arguments?.getString("total")
+        val name = arguments?.getString("name")
+
+        binding.edtInputamount.setText(total)
+        binding.edtInputname.setText(name)
+
         binding.edtInputdate.setOnClickListener {
             showDatePickerDialog()
         }
@@ -138,4 +144,10 @@ class AddTransactionFragment : Fragment() {
             }
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
