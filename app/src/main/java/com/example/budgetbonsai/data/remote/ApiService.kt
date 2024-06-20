@@ -53,16 +53,6 @@ interface ApiService {
     @GET("wishlist")
     suspend fun getWishlist(): WishlistResponse
 
-//    @FormUrlEncoded
-//    @POST("wishlist")
-//    suspend fun addWishlist(
-//        @Field("name") name: String,
-//        @Field("amount") amount: Int,
-//        @Field("saving_plan") savingPlan: String,
-//        @Field("type") type: String,
-//        @Field("file") file: String
-//    ): AddWishlistResponse
-
     @Multipart
     @POST("wishlist")
     suspend fun addWishlist(

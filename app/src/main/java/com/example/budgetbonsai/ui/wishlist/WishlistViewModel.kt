@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.budgetbonsai.data.model.Wishlist
 import com.example.budgetbonsai.data.remote.response.AddWishlistResponse
 import com.example.budgetbonsai.data.remote.response.DeleteResponse
 import com.example.budgetbonsai.data.remote.response.EditWishlistResponse
@@ -133,6 +134,45 @@ class WishlistViewModel(private val wishlistRepository: WishlistRepository, priv
                 _editWishlistResult.postValue(Result.Error(errorMessage))
             }
         }
+    }
+
+    fun editWishlistAmount(id: String, currentWishlist: WishlistItem, additionalAmount: Int) {
+        _editWishlistResult.value = Result.Loading
+        viewModelScope.launch {
+            try {
+                val newAmount = currentWishlist.amount?.plus(additionalAmount)
+
+                val file = uriToFile(Uri.parse(currentWishlist.image.toString()), context)
+                val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                val filePart = MultipartBody.Part.createFormData("file", file.name, requestFile)
+
+                val namePart = RequestBody.create("text/plain".toMediaTypeOrNull(),
+                    currentWishlist.name.toString()
+                )
+                val amountPart = RequestBody.create("text/plain".toMediaTypeOrNull(), newAmount.toString())
+                val savingPlanPart = RequestBody.create("text/plain".toMediaTypeOrNull(),
+                    currentWishlist.savingPlan.toString()
+                )
+                val typePart = RequestBody.create("text/plain".toMediaTypeOrNull(),
+                    currentWishlist.type.toString()
+                )
+
+                val result = wishlistRepository.editWishlist(id, namePart, amountPart, savingPlanPart, typePart, filePart)
+                _editWishlistResult.postValue(Result.Success(result))
+            } catch (e: HttpException) {
+                val errorMessage = "HTTP ${e.code()}: ${e.response()?.errorBody()?.string() ?: e.message()}"
+                Log.e("WishlistViewModel", "Error editing wishlist amount: $errorMessage")
+                _editWishlistResult.postValue(Result.Error(errorMessage))
+            } catch (e: Exception) {
+                val errorMessage = "Unknown error: ${e.message}"
+                Log.e("WishlistViewModel", "Error editing wishlist amount: $errorMessage")
+                _editWishlistResult.postValue(Result.Error(errorMessage))
+            }
+        }
+    }
+
+    fun updateWishlistAmount(id: String, currentWishlist: WishlistItem, additionalAmount: Int) {
+        editWishlistAmount(id, currentWishlist, additionalAmount)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

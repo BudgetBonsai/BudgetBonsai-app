@@ -98,20 +98,39 @@ class WishlistFragment : Fragment() {
             }
         }
 
+//        viewModel.editWishlistResult.observe(viewLifecycleOwner) { result ->
+//            when (result) {
+//                is Result.Loading -> {
+//                    // Show loading indicator
+//                }
+//                is Result.Success -> {
+//                    // Wishlist edited successfully
+//                    Toast.makeText(context, "Wishlist updated successfully", Toast.LENGTH_SHORT).show()
+//                    viewModel.fetchWishlist() // Refresh the wishlist
+//                }
+//                is Result.Error -> {
+//                    // Handle error
+//                    Log.e("WishlistFragment", "Error editing wishlist: ${result.error}")
+//                    Toast.makeText(context, "Failed to update wishlist", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+
         viewModel.editWishlistResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
-                    // Show loading indicator
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is Result.Success -> {
-                    // Wishlist edited successfully
-                    Toast.makeText(context, "Wishlist updated successfully", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Deposit successful", Toast.LENGTH_SHORT).show()
                     viewModel.fetchWishlist() // Refresh the wishlist
                 }
                 is Result.Error -> {
-                    // Handle error
-                    Log.e("WishlistFragment", "Error editing wishlist: ${result.error}")
-                    Toast.makeText(context, "Failed to update wishlist", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                    val errorMessage = "Failed to deposit amount: ${result.error}"
+                    Log.e("WishlistFragment", errorMessage)
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -162,9 +181,9 @@ class WishlistFragment : Fragment() {
             .setTitle("Deposit Amount")
             .setView(dialogView)
             .setPositiveButton("Deposit") { _, _ ->
-                val amount = editTextDepositAmount.text.toString().toIntOrNull()
-                if (amount != null) {
-                    depositAmount(item, amount)
+                val additionalAmount = editTextDepositAmount.text.toString().toIntOrNull()
+                if (additionalAmount != null) {
+                    viewModel.updateWishlistAmount(item.id!!, item, additionalAmount)
                 } else {
                     Toast.makeText(requireContext(), "Invalid amount", Toast.LENGTH_SHORT).show()
                 }

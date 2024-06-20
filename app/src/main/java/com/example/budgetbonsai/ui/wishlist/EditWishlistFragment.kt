@@ -13,6 +13,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.local.dataStore
@@ -78,6 +79,11 @@ class EditWishlistFragment : Fragment() {
             pickMediaLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
+        val btnBack = binding.backImageButton
+        btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         viewModel.editWishlistResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
@@ -86,6 +92,7 @@ class EditWishlistFragment : Fragment() {
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     Snackbar.make(requireView(), "Wishlist updated successfully", Snackbar.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
                     // Optionally, navigate back to previous fragment or perform other actions
                 }
                 is Result.Error -> {
@@ -114,7 +121,7 @@ class EditWishlistFragment : Fragment() {
                     name,
                     amount,
                     savingPlan,
-                    "Weekly",
+                    viewModel.selectedWishlistType,
                     viewModel.imageUri.toString()
                 )
             } else {
