@@ -181,29 +181,9 @@
             pieChart.animateY(1000)
         }
 
-//        private fun observeGrowthMessage() {
-//            viewModel.growthMessageLiveData.observe(viewLifecycleOwner) { result ->
-//                when (result) {
-//                    is Result.Loading -> {
-//                        // Tampilkan loading
-//                        // Misalnya, Anda bisa menampilkan progress bar
-//                        // binding.progressBar.visibility = View.VISIBLE
-//                    }
-//                    is Result.Success -> {
-//                        // Sembunyikan loading
-//                        // binding.progressBar.visibility = View.GONE
-//                        // Tampilkan hasil growth message ke TextView
-//                        val growthResponse = result.data
-//                        val message = growthResponse.growthMessage
-//                        tvPrediction.text = message
-//                    }
-//                    is Result.Error -> {
-//                        // Sembunyikan loading
-//                        // binding.progressBar.visibility = View.GONE
-//                        // Tampilkan pesan error
-//                        Toast.makeText(context, "Error fetching growth message", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-//        }
+        override fun onResume() {
+            super.onResume()
+            transactionViewModel.getTransactions()
+            viewModel.fetchPredict()
+        }
     }

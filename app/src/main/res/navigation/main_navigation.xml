@@ -51,11 +51,6 @@
         android:label="fragment_add_expenses"
         tools:layout="@layout/fragment_add_transaction" />
     <fragment
-        android:id="@+id/addToWishlistFragment"
-        android:name="com.example.budgetbonsai.ui.add.AddtoWishlistFragment"
-        android:label="fragment_add_to_wishlist"
-        tools:layout="@layout/fragment_add_transaction" />
-    <fragment
         android:id="@+id/editWishlistFragment"
         android:name="com.example.budgetbonsai.ui.wishlist.EditWishlistFragment"
         android:label="fragment_edit_wishlist"

@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.example.budgetbonsai.R
 import com.example.budgetbonsai.data.local.UserPreference
 import com.example.budgetbonsai.data.local.dataStore
 import com.example.budgetbonsai.data.remote.ApiConfig
@@ -54,22 +56,42 @@ class EditWishlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Ambil data dari Bundle
-        val wishlistItem: WishlistItem? = arguments?.getParcelable("wishlist_item")
-
-        wishlistItem?.let {
-            Log.d("EditWishlistFragment", "Received item for edit: ${it.id}")
-            binding.editTextName.setText(it.name)
-            binding.editTextAmount.setText(it.amount.toString())
-            binding.editTextSavingPlan.setText(it.savingPlan)
-        }
-
         userPreference = UserPreference.getInstance(requireContext().dataStore)
 
         val apiService = ApiConfig.getApiService(userPreference)
         val repository = WishlistRepository(apiService)
         val viewModelFactory = WishlistViewModel.WishlistViewModelFactory(repository, requireContext())
         viewModel = ViewModelProvider(this, viewModelFactory).get(WishlistViewModel::class.java)
+
+        val wishlistItem: WishlistItem? = arguments?.getParcelable("wishlist_item")
+
+        val toggleGroup = binding.toggleButton
+
+        wishlistItem?.let {
+            Log.d("EditWishlistFragment", "Received item for edit: ${it.id}")
+            binding.editTextName.setText(it.name)
+            binding.editTextAmount.setText(it.amount.toString())
+            binding.editTextSavingPlan.setText(it.savingPlan)
+            viewModel.originalImageUrl = it.image
+            Glide.with(this)
+                .load(it.image)
+                .into(binding.savingImage)
+            when (it.type) {
+                "Daily" -> toggleGroup.check(R.id.btn_daily)
+                "Weekly" -> toggleGroup.check(R.id.btn_weekly)
+                "Monthly" -> toggleGroup.check(R.id.btn_monthly)
+            }
+        }
+
+        toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.btn_daily -> viewModel.selectedWishlistType = "Daily"
+                    R.id.btn_weekly -> viewModel.selectedWishlistType = "Weekly"
+                    R.id.btn_monthly -> viewModel.selectedWishlistType = "Monthly"
+                }
+            }
+        }
 
         binding.btnEditwishlist.setOnClickListener {
             editWishlist(wishlistItem)

@@ -92,15 +92,15 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp">
+                    android:paddingTop="16dp"
+                    app:singleSelection="true">
 
                     <Button
                         style="?attr/materialButtonOutlinedStyle"
                         android:id="@+id/btn_daily"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Daily"
-                        app:singleSelection="true" />
+                        android:text="Daily" />
 
                     <Button
                         style="?attr/materialButtonOutlinedStyle"

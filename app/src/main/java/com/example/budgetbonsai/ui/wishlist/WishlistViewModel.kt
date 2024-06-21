@@ -48,6 +48,7 @@ class WishlistViewModel(private val wishlistRepository: WishlistRepository, priv
     private val notificationScheduler = NotificationScheduler(context)
     var imageUri: Uri? = null
     var selectedWishlistType: String = "Weekly"
+    var originalImageUrl: String? = null
 
     init {
         fetchWishlist()

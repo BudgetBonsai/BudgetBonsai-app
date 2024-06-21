@@ -25,7 +25,12 @@ class WishlistViewHolder(private val binding: ItemWishlistBinding) : RecyclerVie
             .load(item.image)
             .into(binding.ivWishlist)
         binding.tvWishlistName.text = item.name
-        binding.tvWishlistLeft.text = "You currently saved $${item.amount} out of $${item.savingPlan}"
+        if (item.amount == item.savingPlan?.toInt()) {
+            binding.tvWishlistLeft.text = "Congratulations! You've reached your saving goal of $${item.savingPlan}!"
+        } else {
+            binding.tvWishlistLeft.text = "You currently saved $${item.amount} out of $${item.savingPlan}"
+        }
+//        binding.tvWishlistLeft.text = "You currently saved $${item.amount} out of $${item.savingPlan}"
 //        binding.tvDeadline.text = "You have until ${item.savingPlan} to finish this wishlist"
     }
 }
