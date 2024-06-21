@@ -14,10 +14,11 @@ class WishlistViewHolder(private val binding: ItemWishlistBinding) : RecyclerVie
 
     val btnDelWishlist: ImageButton = binding.btnDelWishlist
     val btnEditWishlist: ImageButton = binding.btnEditWishlist
+    val btnDeposit: Button = binding.btnDeposit
 
-//    fun setOnClickListener(listener: (Int) -> Unit) {
-//        binding.btnDeposit.setOnClickListener { listener(R.id.btn_deposit) }
-//    }
+    fun setOnClickListener(listener: (Int) -> Unit) {
+        binding.btnDeposit.setOnClickListener { listener(R.id.btn_deposit) }
+    }
 
     fun bind(item: WishlistItem) {
         Glide.with(binding.root.context)

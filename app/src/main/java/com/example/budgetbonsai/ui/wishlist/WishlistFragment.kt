@@ -117,6 +117,25 @@ class WishlistFragment : Fragment() {
             }
         }
 
+        viewModel.depositResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    // Optionally, show loading indicator
+                }
+                is Result.Success -> {
+                    Toast.makeText(requireContext(), "Deposit successful", Toast.LENGTH_SHORT).show()
+                    viewModel.fetchWishlist()
+                    viewModel.depositResult.removeObservers(viewLifecycleOwner)  // Remove observer after success
+                }
+                is Result.Error -> {
+                    val errorMessage = "Failed to deposit amount: ${result.error}"
+                    Log.e("WishlistFragment", errorMessage)
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                    viewModel.depositResult.removeObservers(viewLifecycleOwner)  // Remove observer after error
+                }
+            }
+        }
+
         return view
     }
 
@@ -165,7 +184,7 @@ class WishlistFragment : Fragment() {
             .setPositiveButton("Deposit") { _, _ ->
                 val additionalAmount = editTextDepositAmount.text.toString().toIntOrNull()
                 if (additionalAmount != null) {
-                    viewModel.updateWishlistAmount(item.id!!, item, additionalAmount)
+                    depositAmount(item, additionalAmount)
                 } else {
                     Toast.makeText(requireContext(), "Invalid amount", Toast.LENGTH_SHORT).show()
                 }

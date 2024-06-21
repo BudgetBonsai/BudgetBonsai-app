@@ -29,6 +29,10 @@ class WishlistAdapter(private val context: Context, private var wishlist: List<W
         holder.btnEditWishlist.setOnClickListener {
             onEditClick(wishlist[position])
         }
+holder.setOnClickListener {
+            onDepositClick(wishlist[position])
+        }
+
         holder.bind(wishlist[position])
     }
 
@@ -41,15 +45,6 @@ class WishlistAdapter(private val context: Context, private var wishlist: List<W
         val dialog = DepositFragment()
         if (context is FragmentActivity) {
             dialog.show((context as FragmentActivity).supportFragmentManager, DepositFragment.TAG)
-        } else {
-            throw ClassCastException("Context must be an instance of FragmentActivity")
-        }
-    }
-
-    private fun showWithdrawDialog() {
-        val dialog = WithdrawFragment()
-        if (context is FragmentActivity) {
-            dialog.show((context as FragmentActivity).supportFragmentManager, WithdrawFragment.TAG)
         } else {
             throw ClassCastException("Context must be an instance of FragmentActivity")
         }
