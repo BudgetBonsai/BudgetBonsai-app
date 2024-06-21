@@ -51,7 +51,7 @@ class NotificationWorker(
                 else -> 1L
             }
             val workRequest = OneTimeWorkRequestBuilder<NotificationWorker>()
-                .setInitialDelay(interval, TimeUnit.MINUTES)
+                .setInitialDelay(interval, TimeUnit.DAYS)
                 .build()
 
             WorkManager.getInstance(context).enqueue(workRequest)
