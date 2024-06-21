@@ -23,9 +23,6 @@ class WishlistAdapter(private val context: Context, private var wishlist: List<W
     }
 
     override fun onBindViewHolder(holder: WishlistViewHolder, position: Int) {
-        holder.btnDeposit.setOnClickListener {
-            onDepositClick(wishlist[position])
-        }
         holder.btnDelWishlist.setOnClickListener {
             onDeleteClick(wishlist[position])
         }
