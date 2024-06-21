@@ -24,7 +24,7 @@ class NotificationReceiver : BroadcastReceiver() {
         }
 
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.baseline_notifications_24) // Your notification icon
+            .setSmallIcon(R.drawable.baseline_notifications_24)
             .setContentTitle("Wishlist Reminder")
             .setContentText("Don't forget to save for your wishlist!")
             .setPriority(NotificationCompat.PRIORITY_HIGH)

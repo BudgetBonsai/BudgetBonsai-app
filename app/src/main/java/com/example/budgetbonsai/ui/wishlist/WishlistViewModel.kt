@@ -117,7 +117,6 @@ class WishlistViewModel(private val wishlistRepository: WishlistRepository, priv
                 val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
                 val filePart = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
-//                val idPart = RequestBody.create("text/plain".toMediaTypeOrNull(), id)
                 val namePart = RequestBody.create("text/plain".toMediaTypeOrNull(), name)
                 val amountPart = RequestBody.create("text/plain".toMediaTypeOrNull(), amount.toString())
                 val savingPlanPart = RequestBody.create("text/plain".toMediaTypeOrNull(), savingPlan)
@@ -184,7 +183,7 @@ class WishlistViewModel(private val wishlistRepository: WishlistRepository, priv
             try {
                 val response = wishlistRepository.depositWishlistAmount(id, date, amount)
                 _depositResult.value = Result.Success(response)
-                fetchWishlist() // Refresh wishlist setelah deposit
+                fetchWishlist()
             } catch (e: Exception) {
                 _depositResult.value = Result.Error(e.toString())
             }

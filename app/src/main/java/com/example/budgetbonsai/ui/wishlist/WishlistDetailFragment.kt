@@ -25,7 +25,6 @@ class WishlistDetailFragment : Fragment() {
 
         val btnBack = binding.backImageButton
         btnBack.setOnClickListener {
-            // Use NavController to navigate back to the previous fragment
             findNavController().navigateUp()
         }
         return binding.root

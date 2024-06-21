@@ -49,9 +49,7 @@ class ReceiptsViewModel {
     }
 
     fun getReceipts(text: String): Receipts {
-        //val originalResult = text.findFloat()
         val originalResult = text.findFormattedNumber()
-        //val originalResult = text.findWholeNumbers()
         if (originalResult.isEmpty()) return Receipts()
         else {
             val receipts = Receipts()

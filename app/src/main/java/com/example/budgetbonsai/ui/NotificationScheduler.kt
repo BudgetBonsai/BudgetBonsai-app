@@ -24,7 +24,7 @@ class NotificationScheduler(private val context: Context) {
         )
 
         val intervalMillis = when (type) {
-            "Daily" -> AlarmManager.INTERVAL_FIFTEEN_MINUTES
+            "Daily" -> AlarmManager.INTERVAL_DAY
             "Weekly" -> AlarmManager.INTERVAL_DAY * 7
             "Monthly" -> AlarmManager.INTERVAL_DAY * 30
             else -> AlarmManager.INTERVAL_DAY

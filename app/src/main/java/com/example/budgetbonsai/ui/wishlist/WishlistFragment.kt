@@ -98,24 +98,6 @@ class WishlistFragment : Fragment() {
             }
         }
 
-//        viewModel.editWishlistResult.observe(viewLifecycleOwner) { result ->
-//            when (result) {
-//                is Result.Loading -> {
-//                    // Show loading indicator
-//                }
-//                is Result.Success -> {
-//                    // Wishlist edited successfully
-//                    Toast.makeText(context, "Wishlist updated successfully", Toast.LENGTH_SHORT).show()
-//                    viewModel.fetchWishlist() // Refresh the wishlist
-//                }
-//                is Result.Error -> {
-//                    // Handle error
-//                    Log.e("WishlistFragment", "Error editing wishlist: ${result.error}")
-//                    Toast.makeText(context, "Failed to update wishlist", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-
         viewModel.editWishlistResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
@@ -124,7 +106,7 @@ class WishlistFragment : Fragment() {
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), "Deposit successful", Toast.LENGTH_SHORT).show()
-                    viewModel.fetchWishlist() // Refresh the wishlist
+                    viewModel.fetchWishlist()
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -200,14 +182,12 @@ class WishlistFragment : Fragment() {
         viewModel.depositResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
-                    // Handle loading state if needed
+
                 }
                 is Result.Success -> {
-                    // Handle success state if needed
                     Toast.makeText(requireContext(), "Deposit successful", Toast.LENGTH_SHORT).show()
                 }
                 is Result.Error -> {
-                    // Handle error state
                     val errorMessage = "Failed to deposit amount: ${result.error}"
                     Log.e("WishlistFragment", errorMessage)
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
@@ -221,7 +201,7 @@ class WishlistFragment : Fragment() {
             "Daily" -> AlarmManager.INTERVAL_DAY
             "Weekly" -> AlarmManager.INTERVAL_DAY * 7
             "Monthly" -> AlarmManager.INTERVAL_DAY * 30
-            else -> AlarmManager.INTERVAL_DAY // Default, misalnya jika tidak ada nilai yang cocok
+            else -> AlarmManager.INTERVAL_DAY
         }
     }
 

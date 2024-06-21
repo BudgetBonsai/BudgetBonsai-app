@@ -76,15 +76,4 @@ class RegisterActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
-
-        //Dialog
-//        binding.loginButton.setOnClickListener {
-//            MaterialAlertDialogBuilder(this)
-//                .setTitle("Register")
-//                .setMessage("Registering...")
-//                .setPositiveButton("OK") { dialog, which ->
-//                    dialog.dismiss()
-//                }
-//                .show()
-//        }
     }

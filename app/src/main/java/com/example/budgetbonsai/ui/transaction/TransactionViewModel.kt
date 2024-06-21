@@ -54,7 +54,7 @@ class TransactionViewModel(private val repository: TransactionRepository) : View
                     _totals.value = Pair(0.0, 0.0)
                 }
                 else -> {
-                    // do nothing
+
                 }
             }
         }
@@ -69,7 +69,7 @@ class TransactionViewModel(private val repository: TransactionRepository) : View
 
     private fun getCurrentMonth(): Int {
         val calendar = Calendar.getInstance()
-        return calendar.get(Calendar.MONTH) + 1 // Calendar.MONTH is zero-based
+        return calendar.get(Calendar.MONTH) + 1
     }
 
     private fun getCurrentYear(): Int {

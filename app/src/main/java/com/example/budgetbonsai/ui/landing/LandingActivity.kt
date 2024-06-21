@@ -56,7 +56,7 @@ class LandingActivity : AppCompatActivity() {
     private fun goToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish() // Optional: Hapus LandingActivity dari stack jika tidak ingin kembali ke sini
+        finish()
     }
 
     private fun checkSessionAndRedirect() {

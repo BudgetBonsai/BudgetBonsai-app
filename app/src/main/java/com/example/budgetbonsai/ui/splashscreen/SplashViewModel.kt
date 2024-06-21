@@ -13,7 +13,7 @@ class SplashViewModel : ViewModel() {
 
     fun startSplashTimer() {
         viewModelScope.launch {
-            delay(3000) // 3 detik
+            delay(3000)
             _isTimerFinished.value = true
         }
     }

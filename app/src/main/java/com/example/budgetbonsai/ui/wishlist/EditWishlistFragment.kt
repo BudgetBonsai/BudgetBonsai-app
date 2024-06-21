@@ -14,7 +14,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.budgetbonsai.R
 import com.example.budgetbonsai.data.local.UserPreference
@@ -27,7 +26,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.example.budgetbonsai.utils.Result
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 class EditWishlistFragment : Fragment() {
@@ -39,7 +38,6 @@ class EditWishlistFragment : Fragment() {
 
     private val pickMediaLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         uri?.let {
-            // Use the URI to load the image into the ImageView
             binding.savingImage.setImageURI(it)
             viewModel.imageUri = it
         }
@@ -48,7 +46,7 @@ class EditWishlistFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentEditWishlistBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -115,7 +113,6 @@ class EditWishlistFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                     Snackbar.make(requireView(), "Wishlist updated successfully", Snackbar.LENGTH_SHORT).show()
                     findNavController().navigateUp()
-                    // Optionally, navigate back to previous fragment or perform other actions
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -133,7 +130,7 @@ class EditWishlistFragment : Fragment() {
 
             if (name.isNotEmpty() && amount != null && savingPlan.isNotEmpty() && viewModel.imageUri != null) {
                 val imageFile = uriToFile(viewModel.imageUri!!, requireContext())
-                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), imageFile)
+                val requestFile = imageFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
                 val body = MultipartBody.Part.createFormData("file", imageFile.name, requestFile)
 
                 Log.d("EditWishlistFragment", "Sending edit request for item ID: ${item.id}")

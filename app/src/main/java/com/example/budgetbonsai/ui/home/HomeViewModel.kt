@@ -44,19 +44,6 @@ class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
         }
     }
 
-//    fun fetchGrowthMessage() {
-//        viewModelScope.launch {
-//            _growthMessageLiveData.value = Result.Loading
-//            try {
-//                val token = repository.getUserToken()
-//                val response = repository.getPredictResponse("Bearer $token")
-//                _growthMessageLiveData.value = Result.Success(response)
-//            } catch (e: Exception) {
-//                _growthMessageLiveData.value = Result.Error(e.toString())
-//            }
-//        }
-//    }
-
     class HomeViewModelFactory(private val repository: HomeRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {

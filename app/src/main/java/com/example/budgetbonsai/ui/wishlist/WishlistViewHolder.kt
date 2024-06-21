@@ -30,7 +30,5 @@ class WishlistViewHolder(private val binding: ItemWishlistBinding) : RecyclerVie
         } else {
             binding.tvWishlistLeft.text = "You currently saved $${item.amount} out of $${item.savingPlan}"
         }
-//        binding.tvWishlistLeft.text = "You currently saved $${item.amount} out of $${item.savingPlan}"
-//        binding.tvDeadline.text = "You have until ${item.savingPlan} to finish this wishlist"
     }
 }

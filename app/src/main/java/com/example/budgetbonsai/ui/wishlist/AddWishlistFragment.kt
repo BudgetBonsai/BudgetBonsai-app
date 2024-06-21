@@ -35,7 +35,6 @@ class AddWishlistFragment : Fragment() {
 
     private val pickMediaLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         uri?.let {
-            // Use the URI to load the image into the ImageView
             binding.savingImage.setImageURI(it)
             viewModel.imageUri = it
         }
@@ -46,7 +45,6 @@ class AddWishlistFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_add_wishlist, container, false)
         _binding = FragmentAddWishlistBinding.inflate(inflater, container, false)
 
         userPreference = UserPreference.getInstance(requireContext().dataStore)
@@ -57,7 +55,6 @@ class AddWishlistFragment : Fragment() {
 
         val btnBack = binding.backImageButton
         btnBack.setOnClickListener {
-            // Use NavController to navigate back to the previous fragment
             findNavController().navigateUp()
         }
 
@@ -95,17 +92,14 @@ class AddWishlistFragment : Fragment() {
             if (isChecked) {
                 when (checkedId) {
                     R.id.btn_daily -> {
-                        // Handle daily toggle button selection
                         viewModel.selectedWishlistType = "Daily"
                     }
 
                     R.id.btn_weekly -> {
-                        // Handle weekly toggle button selection
                         viewModel.selectedWishlistType = "Weekly"
                     }
 
                     R.id.btn_monthly -> {
-                        // Handle monthly toggle button selection
                         viewModel.selectedWishlistType = "Monthly"
                     }
                 }
@@ -113,34 +107,8 @@ class AddWishlistFragment : Fragment() {
         }
     }
 
-//    private fun addWishlist() {
-//        val name = binding.wishlistname.editText?.text.toString()
-//        val amount = binding.wishlistamount.editText?.text.toString().toIntOrNull()
-//        val savingPlan = binding.wishlistsaving.editText?.text.toString()
-//        val imageUrl = viewModel.imageUri.toString() // Mengambil URI gambar yang dipilih
-//
-//        if (name.isNotEmpty() && amount != null && savingPlan.isNotEmpty()) {
-//            viewModel.addWishlist(name, amount, savingPlan, "your_type", imageUrl)
-//        } else {
-//            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
-//        }
-//    }
-
-//    private fun addWishlist() {
-//        val name = binding.wishlistname.editText?.text.toString()
-//        val amount = binding.wishlistamount.editText?.text.toString().toIntOrNull()
-//        val savingPlan = binding.wishlistsaving.editText?.text.toString()
-//
-//        if (name.isNotEmpty() && amount != null && savingPlan.isNotEmpty() && viewModel.imageUri != null) {
-//            viewModel.addWishlist(name, amount, savingPlan, "Weekly", viewModel.imageUri.toString())
-//        } else {
-//            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
-//        }
-//    }
-
     private fun addWishlist() {
         val name = binding.wishlistname.editText?.text.toString()
-//        val amount = binding.wishlistamount.editText?.text.toString().toIntOrNull()
         val savingPlan = binding.wishlistsaving.editText?.text.toString()
 
         if (name.isNotEmpty()  && savingPlan.isNotEmpty() && viewModel.imageUri != null) {

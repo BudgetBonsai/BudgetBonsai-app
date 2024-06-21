@@ -89,23 +89,4 @@ class WishlistRepository(private val apiService: ApiService) {
         val depositRequest = DepositRequest(date, amount, "Income")
         return apiService.depositWishlistAmount(id, depositRequest)
     }
-
-//    suspend fun addWishlist(name: String, amount: Int, savingPlan: String, type: String, file: String): LiveData<Result<AddWishlistResponse>> {
-//        val resultLiveData = MutableLiveData<Result<AddWishlistResponse>>()
-//        try {
-//            val response = apiService.addWishlist(name, amount, savingPlan, type, file)
-//            if (!response.error!!) {
-//                resultLiveData.value = Result.Success(response)
-//            } else {
-//                val errorMessage = response.message ?: "Unknown error"
-//                Log.e("WishlistRepository", "API Error: $errorMessage")
-//                resultLiveData.value = Result.Error(errorMessage)
-//            }
-//        } catch (e: Exception) {
-//            Log.e("WishlistRepository", "Network error occurred", e)
-//            resultLiveData.value = Result.Error("Network error occurred")
-//        }
-//        return resultLiveData
-//    }
-
 }

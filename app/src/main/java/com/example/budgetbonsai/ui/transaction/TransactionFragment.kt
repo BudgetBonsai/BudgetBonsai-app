@@ -77,7 +77,6 @@ class TransactionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        setupTabLayoutAndViewPager()
 
         pieChart = view.findViewById(R.id.piechart)
 
@@ -97,23 +96,6 @@ class TransactionFragment : Fragment() {
             }
         }
     }
-
-//    private fun setupTabLayoutAndViewPager() {
-//        val tabLayout = binding.tabLayout
-//        val viewPager = binding.viewPager
-//
-//        val adapter = ViewPagerAdapter(this)
-//        viewPager.adapter = adapter
-//
-//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-//            tab.text = when (position) {
-//                0 -> "Daily"
-//                1 -> "Weekly"
-//                2 -> "Monthly"
-//                else -> null
-//            }
-//        }.attach()
-//    }
 
     private fun updatePieChart(transactions: List<DataItem>) {
         val categoryTotals = mutableMapOf<String, Float>()

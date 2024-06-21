@@ -89,8 +89,8 @@
                     is Result.Success -> {
                         binding.progressBar.visibility = View.GONE
                         val growthResponse = result.data
-                        val message = growthResponse.growthMessage
-                        binding.tvPrediction.text = message
+//                        val message = growthResponse.growthMessage
+//                        binding.tvPrediction.text = message
                         setImageBasedOnPrediction(growthResponse.prediction)
                     }
                     is Result.Error -> {
@@ -125,13 +125,22 @@
 
         private fun setImageBasedOnPrediction(prediction: Any?) {
             if (prediction is Number) {
-                if (prediction.toDouble() >= 0) {
+                val predictionValue = prediction.toDouble()
+                val isGoodPrediction = predictionValue >= 0
+                val tip = getRandomTip(isGoodPrediction)
+
+                if (isGoodPrediction) {
                     binding.imageView.setImageResource(R.drawable.bonsai_happy)
+                    binding.tvPrediction.text = "Your financial growth is +${String.format("%.2f", predictionValue)}%, Keep it up!"
                 } else {
                     binding.imageView.setImageResource(R.drawable.bonsai_sad)
+                    binding.tvPrediction.text = "Your financial growth is ${String.format("%.2f", predictionValue)}%, Try to save more!"
                 }
+
+                binding.tvTips.text = tip
             } else {
                 binding.imageView.setImageResource(R.drawable.bonsai_neutral)
+                binding.tvTips.text = "Keep tracking your finances regularly for better predictions."
             }
         }
 
@@ -180,6 +189,30 @@
 
             pieChart.animateY(1000)
         }
+
+        private fun getRandomTip(isGoodPrediction: Boolean): String {
+            return if (isGoodPrediction) {
+                goodPredictionTips.random()
+            } else {
+                badPredictionTips.random()
+            }
+        }
+
+        private val goodPredictionTips = listOf(
+            "Keep up the good work! Your financial habits are paying off.",
+            "You're on the right track. Consider increasing your savings rate.",
+            "Great job! Now might be a good time to review your investment strategy.",
+            "Your finances are looking good. Think about setting some new financial goals.",
+            "Excellent progress! Don't forget to reward yourself for your good habits."
+        )
+
+        private val badPredictionTips = listOf(
+            "It's a bump in the road. Review your expenses and look for areas to cut back.",
+            "Don't worry, everyone faces challenges. Try creating a stricter budget.",
+            "It's time to reassess your financial strategy. Consider talking to a financial advisor.",
+            "This is an opportunity to improve. Start by tracking all your expenses.",
+            "Remember, small changes can make a big difference. Try the 50/30/20 budgeting rule."
+        )
 
         override fun onResume() {
             super.onResume()
